@@ -27,9 +27,9 @@
                 </t>
             </span>
                </td>
-               <td>
-                   <t t-if="props.line.product.default_code" t-esc="props.line.product.default_code"/>
-               </td>
+<!--               <td>-->
+<!--                   <t t-if="props.line.product.default_code" t-esc="props.line.product.default_code"/>-->
+<!--               </td>-->
               <td>
                   <t t-if="customerNote" t-esc="customerNote" />
               </td>
@@ -46,17 +46,17 @@
                         discount
                     </span>
               </td>
-              <td>
-                  <t t-if="props.line.get_lot_lines()">
-                    <ul class="info-list">
-                        <t t-foreach="props.line.get_lot_lines()" t-as="lot" t-key="lot.cid">
-                            <li>
-                                SN <t t-esc="lot.attributes['lot_name']"/>
-                            </li>
-                        </t>
-                    </ul>
-                </t>
-              </td>
+<!--              <td>-->
+<!--                  <t t-if="props.line.get_lot_lines()">-->
+<!--                    <ul class="info-list">-->
+<!--                        <t t-foreach="props.line.get_lot_lines()" t-as="lot" t-key="lot.cid">-->
+<!--                            <li>-->
+<!--                                SN <t t-esc="lot.attributes['lot_name']"/>-->
+<!--                            </li>-->
+<!--                        </t>-->
+<!--                    </ul>-->
+<!--                </t>-->
+<!--              </td>-->
                <td>
                    <t t-esc="props.line.get_unit_display_price()" />
                </td>

@@ -109,8 +109,43 @@ odoo.define('pos_custom_theme.numpad_widget', function (require) {
             return true;
         }
         async ClickOpenDrawer(){
-            console.log(this.pos)
-//            await this.env.pos.proxy.printer.open_cashbox();
+            if(this.env.pos.config.iface_cashdrawer){
+                await this.env.pos.proxy.printer.open_cashbox();
+            }
+        }
+        async ClickRefund(){
+            const customer = this.env.pos.get_order().get_client();
+            const searchDetails = customer ? { fieldName: 'CUSTOMER', searchTerm: customer.name } : {};
+            this.trigger('close-popup');
+            this.showScreen('TicketScreen', {
+                ui: { filter: 'SYNCED', searchDetails },
+                destinationOrder: this.env.pos.get_order(),
+            });
+        }
+        async ClickBarcodePromo(){
+            const { confirmed, payload: code } = await this.showPopup('TextInputPopup', {
+                title: this.env._t('Enter Promotion or Coupon Code'),
+                startingValue: '',
+            });
+            if (confirmed && code !== '') {
+                const order = this.env.pos.get_order();
+                order.activateCode(code);
+            }
+        }
+        async ClickResetProgram(){
+            const order = this.env.pos.get_order();
+            order.resetPrograms();
+            this.trigger('close-popup');
+        }
+        async ClickClearAllLines(){
+            var order = this.env.pos.get_order()
+            var order_lines = order.get_orderlines()
+            if(order && order_lines){
+                for (var i=0;i<=order_lines.length;i++){
+                    order.remove_orderline(order_lines[i])
+                    order.trigger('change');
+                }
+            }
         }
     };
     Registries.Component.extend(NumpadWidget, PosThemeNumpadWidget);

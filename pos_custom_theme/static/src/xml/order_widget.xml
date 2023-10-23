@@ -39,12 +39,12 @@
                             <tr>
                                 <th>S#</th>
                                 <th>Product</th>
-                                <th>Description</th>
+<!--                                <th>Description</th>-->
                                 <th>Note</th>
                                 <th>Unit</th>
                                 <th>Qty</th>
                                 <th>Discount</th>
-                                <th>Lot</th>
+<!--                                <th>Lot</th>-->
                                 <th>Rate</th>
                                 <th>Total</th>
                             </tr>
@@ -57,8 +57,9 @@
                             </t>
                             </tbody>
                         </table>
+                             <OrderSummary total="state.total" tax="state.tax" />
                         </div>
-                        <OrderSummary total="state.total" tax="state.tax" />
+
                     </t>
                 </div>
 

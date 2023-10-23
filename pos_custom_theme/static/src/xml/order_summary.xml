@@ -20,7 +20,12 @@
               </div>
              <div class="" t-if="env.pos.config.themes == 'theme_new'">
                  <div class="total_section line">
-
+                    <button class="button order-toal">
+                         Total:<br/>
+                            <span class="value">
+                                <t t-esc="props.tax" />
+                            </span>
+                     </button>
                      <button class="button order-tax">
                          Taxes:<br/>
                             <span class="value">
@@ -30,8 +35,14 @@
                      <button class="button discounts">
                          <ActivePrograms/>
                      </button>
-                     <button class="button order-total">
-                        Total:<br/>
+                     <button class="button order-tax">
+                         Freight:<br/>
+                            <span class="value">
+                                <t t-esc="props.tax" />
+                            </span>
+                     </button>
+                     <button class="button order-grand-total">
+                        Grand Total:<br/>
                         <span class="value">
                             <t t-esc="props.total" />
                         </span>

@@ -43,23 +43,6 @@
                       <div class="pads">
                              <div class="subpads">
                                  <NumpadWidget activeMode="state.numpadMode"/>
-                                 <div class="control-buttons">
-                                 <t t-if="env.isMobile and controlButtons.length > 3">
-                                     <div class="control-button" t-on-click="_displayAllControlPopup">More...</div>
-                                 </t>
-                                 <t t-if="!env.isMobile and controlButtons.length > 12">
-                                     <t t-foreach="[0,1,2,3,4,5,6,7,8,10,11,12]" t-as="i" t-key="i">
-                                            <t t-component="controlButtons[i].component" t-key="controlButtons[i].name"/>
-                                     </t>
-                                     <div class="control-button" t-on-click="_displayAllControlPopup">More...</div>
-                                 </t>
-                                 <t t-else="">
-                                     <t t-foreach="controlButtons" t-as="cb" t-key="cb.name">
-                                         <t t-component="cb.component" t-key="cb.name"/>
-                                     </t>
-                                 </t>
-                            </div>
-
                           </div>
                       </div>
                   </div>
