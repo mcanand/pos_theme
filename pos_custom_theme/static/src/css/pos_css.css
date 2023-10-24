@@ -20,10 +20,10 @@
     background-color: #eee;
 }*/
 .pos .numpad{
-    width:833px !important;
+    width:100% !important;
 }
 .pos .numpad button{
-    width:119px !important;
+    width:14.2% !important;
     height: 100px !important;
     transition: none !important;
 }

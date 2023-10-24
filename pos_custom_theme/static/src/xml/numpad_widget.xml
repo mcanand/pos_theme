@@ -117,11 +117,11 @@
                 <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png"
                      width="24" height="21" alt="Backspace"/>
             </button>
-            <button class="button" t-on-click="ClickFastPayment()" t-if="hasPriceControlRights" style="width:178.5px !important;background-color: #ffac00 !important;color: #212529;">
+            <button class="button" t-on-click="ClickFastPayment()" t-if="hasPriceControlRights" style="width:21.5% !important;background-color: #ffac00 !important;color: #212529;">
                 <i class="fa fa-angle-double-right" role="img" aria-label="FastPay" title="FastPay"/>
                 Fast Payment
              </button>
-             <button class="button" t-on-click="trigger(props.actionToTrigger or 'click-pay')" t-if="hasPriceControlRights" style="width:178.5px !important;background-color: #28a745 !important;color: #fff;">
+             <button class="button" t-on-click="trigger(props.actionToTrigger or 'click-pay')" t-if="hasPriceControlRights" style="width:21.5% !important;background-color: #28a745 !important;color: #fff;">
                 <div class="pay-circle" t-att-class="{ 'highlight': props.isActionButtonHighlighted }">
                     <span>
                         <i class="fa fa-chevron-right" role="img" aria-label="Pay" title="Pay"/>
