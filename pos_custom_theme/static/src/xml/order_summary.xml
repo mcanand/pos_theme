@@ -29,7 +29,7 @@
                      <button class="button order-tax">
                          Taxes:<br/>
                             <span class="value">
-                                <t t-esc="props.tax" />
+                                <t t-esc="env.pos.format_currency(env.pos.get_order().get_total_tax())" />
                             </span>
                      </button>
                      <button class="button discounts">
