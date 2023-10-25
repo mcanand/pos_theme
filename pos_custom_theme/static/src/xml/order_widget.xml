@@ -57,7 +57,7 @@
                             </t>
                             </tbody>
                         </table>
-                             <OrderSummary total="state.total" tax="state.tax" />
+                             <OrderSummary total="state.total" tax="state.tax" freight="state.freight_charge"/>
                         </div>
 
                     </t>

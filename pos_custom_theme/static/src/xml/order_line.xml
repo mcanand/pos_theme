@@ -58,11 +58,11 @@
 <!--                </t>-->
 <!--              </td>-->
                <td>
-                   <t t-esc="props.line.get_unit_display_price()" />
+                   <t t-esc="env.pos.format_currency(props.line.get_unit_display_price())" />
                </td>
                <td>
                     <span class="price">
-                        <t t-esc="props.line.get_display_price()"/>
+                        <t t-esc="env.pos.format_currency(props.line.get_display_price())"/>
                     </span>
                </td>
           </tr>

@@ -8,10 +8,10 @@ odoo.define('pos_custom_theme.chrome', function (require) {
             _buildChrome() {
                 super._buildChrome()
                 this.state.theme = this.env.pos.config.themes
+                this.state.logo = this.env.pos.company_logo_base64
             }
         };
 
     Registries.Component.extend(Chrome, PosThemeChrome);
-
     return Chrome;
 });

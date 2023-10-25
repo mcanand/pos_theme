@@ -23,7 +23,7 @@
                     <button class="button order-toal">
                          Total:<br/>
                             <span class="value">
-                                <t t-esc="props.tax" />
+                                <t t-esc="env.pos.format_currency(env.pos.get_order().get_subtotal())" />
                             </span>
                      </button>
                      <button class="button order-tax">
@@ -38,13 +38,13 @@
                      <button class="button order-tax">
                          Freight:<br/>
                             <span class="value">
-                                <t t-esc="props.tax" />
+                                <t t-esc="env.pos.format_currency(env.pos.get_order().get_freight_charge())" />
                             </span>
                      </button>
                      <button class="button order-grand-total">
                         Grand Total:<br/>
                         <span class="value">
-                            <t t-esc="props.total" />
+                            <t t-esc="env.pos.format_currency(env.pos.get_order().get_total_with_tax())" />
                         </span>
                     </button>
                  </div>

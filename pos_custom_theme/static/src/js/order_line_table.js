@@ -1,4 +1,4 @@
-odoo.define('point_of_sale.OrderlineTable', function(require) {
+odoo.define('pos_custom_theme.OrderlineTable', function(require) {
     'use strict';
 
     const PosComponent = require('point_of_sale.PosComponent');

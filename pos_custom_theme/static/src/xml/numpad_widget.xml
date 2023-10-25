@@ -46,10 +46,7 @@
                <button class="mode-button" t-att-class="{'selected-mode': props.activeMode === 'quantity'}"
                        t-on-click="changeMode('quantity')">Qty</button>
 
-                <button class="button" t-on-click="ClickClearAllLines()" t-if="hasPriceControlRights">
-                 <i class="fa fa-bin" role="img" aria-label="clear" title="clear"/>
-                 CLR
-                 </button>
+
                  <button class="button" t-on-click="ClickRefund()" t-if="hasPriceControlRights">
                     <i class="fa fa-undo" role="img" aria-label="Refund" title="Refund" />
                     Return
@@ -59,6 +56,9 @@
                     <span> </span>
                     <span>Freight</span>
                  </button>
+                <button class="button" t-if="hasPriceControlRights">
+
+                </button>
                <br/>
                <button class="input-button number-char" t-on-click="sendInput('4')">4</button>
                <button class="input-button number-char" t-on-click="sendInput('5')">5</button>
@@ -94,18 +94,20 @@
                 }" t-att-disabled="!hasPriceControlRights"
                        t-on-click="changeMode('price')">Price</button>
 
-                <button class="button" t-on-click="showScreen('TicketScreen')" t-if="hasPriceControlRights">
-                 <i class="fa fa-rotate-right" role="img" aria-label="recall" title="recall"/>
-                 Recall
-             </button>
+
+            <button class="button" t-on-click="ClickOpenDrawer()" t-if="hasPriceControlRights">
+                <i class="fa fa-bars" role="img" aria-label="drawer" title="drawer"/>
+                Drawer
+              </button>
              <button class="button" t-on-click="ClickToPrint()" t-if="hasPriceControlRights">
                 <i class="fa fa-print" role="img" aria-label="print" title="print"/>
                 Print
              </button>
-             <button class="button" t-on-click="ClickOpenDrawer()" t-if="hasPriceControlRights">
-                <i class="fa fa-bars" role="img" aria-label="drawer" title="drawer"/>
-                Drawer
-              </button>
+             <button class="button" t-on-click="showScreen('TicketScreen')" t-if="hasPriceControlRights">
+                 <i class="fa fa-rotate-right" role="img" aria-label="recall" title="recall"/>
+                 Recall
+             </button>
+
                <br/>
                <button class="input-button numpad-minus" t-att-class="{ 'disabled-mode': props.disableSign }"
                        t-on-click="sendInput('-')">+/-</button>

@@ -7,8 +7,15 @@ odoo.define('pos_custom_theme.numpad_widget', function (require) {
     const ProductScreen = require('point_of_sale.ProductScreen');
     const { useListener } = require('web.custom_hooks');
     const { isConnectionError } = require('point_of_sale.utils');
+    const useSelectEmployee = require('pos_hr.useSelectEmployee');
 
     const PosThemeNumpadWidget = (NumpadWidget) => class extends NumpadWidget {
+        constructor() {
+            super(...arguments);
+            const { selectEmployee, askPin } = useSelectEmployee();
+            this.selectEmployee = selectEmployee;
+            this.askPin = askPin;
+        }
         async ClickFastPayment(){
             var currentOrder = this.env.pos.get_order()
             var paymentMethod = false
@@ -137,15 +144,16 @@ odoo.define('pos_custom_theme.numpad_widget', function (require) {
             order.resetPrograms();
             this.trigger('close-popup');
         }
-        async ClickClearAllLines(){
-            var order = this.env.pos.get_order()
-            var order_lines = order.get_orderlines()
-            if(order && order_lines){
-                for (var i=0;i<=order_lines.length;i++){
-                    order.remove_orderline(order_lines[i])
-                    order.trigger('change');
-                }
-            }
+        async ClickAddFreightCharge(){
+            var charge = this.env.pos.config.freight_charge
+            const { confirmed, payload: inputPin } = await this.showPopup('NumberPopup', {
+                isPassword: false,
+                title: this.env._t('Freight / Delivery Charge'),
+                startingValue: charge,
+                cheap: false,
+            });
+            var order = this.env.pos.get_order();
+            order.set_freight_charge(inputPin)
         }
     };
     Registries.Component.extend(NumpadWidget, PosThemeNumpadWidget);

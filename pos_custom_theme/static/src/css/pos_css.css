@@ -112,6 +112,7 @@
     height: 100%;
     border:none;
     font-size:17px;
+    padding: 0px 6px;
 }
 .pos .actionpadnew .button-input input:focus{
     border:none;
@@ -180,4 +181,24 @@
     border: 1px solid black;
   background: #e2e2e2;
   transition: all linear 150ms;
+}
+
+.pos .category-list.simple {
+    padding: 0px;
+    background: #cecece;
+    display: flex;
+    /* flex: 1; */
+    width: 613px;
+    overflow-x: scroll;
+}
+.pos .category-simple-button{
+    min-width: 85px;
+}
+.search-bar-portal .search-box input{
+    width: 150px;
+    border-radius: 0px !important;
+}
+.search-bar-portal, .search-bar-portal .search-box{
+    flex: 0 !important;
+
 }

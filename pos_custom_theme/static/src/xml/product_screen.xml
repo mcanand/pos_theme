@@ -35,6 +35,7 @@
               <div class="screen-full-width" t-if="state.theme == 'theme_new'">
                   <link rel="stylesheet" href="/pos_custom_theme/static/src/css/pos_css.css" type="text/css"/>
                   <div class="leftpane pane-border" t-if="!env.isMobile || state.mobile_pane === 'left'">
+                      <div class="search-bar-portal-new"/>
                     <ActionPadNew client="client"/>
                     <OrderWidget/>
                   </div>
@@ -46,72 +47,6 @@
                           </div>
                       </div>
                   </div>
-
-                  <!--<style>
-                      .pos .subpads .control-button {
-                            -webkit-flex-grow: 1;
-                            flex-grow: 1;
-                            width:26%;
-                            background: #e2e2e2;
-                            border: solid 1px #bfbfbf;
-                            display: inline-block;
-                            line-height: 38px;
-                            padding: 10px !important;
-                            text-align: center;
-                            border-radius: 0px !important;
-                            font-size: 18px;
-                            margin-left: 6px;
-                            margin-bottom: 6px;
-                            cursor: pointer;
-                            overflow: hidden;
-                            transition: all linear 150ms;
-                        }
-                      .pos .subpads .control-button:hover{
-                            background-color: white;
-                      }
-                      .pos .numpad{
-                            width:44.5% !important;
-                      }
-                      .pos .numpad button{
-                            width:6.7vw !important;
-                            height: 6vw !important;
-                            transition: none !important;
-                      }
-                      .pos .subpads .control-buttons{
-                            margin-bottom: 0px !important;
-                            padding:10px !important;
-                            margin-top: -4vw;
-                      }
-                      .pos .rightpane{
-                            width:800px !important;
-                      }
-                      .pos .leftpane{
-                            max-width: 550px !important;
-                      }
-                      .pos .actionpadnew{
-                            padding:6px;
-                      }
-                      .pos .actionpadnew button {
-                            /* float: left; */
-                            display: inline-table;
-                            min-width: 120px;
-                            height: 4vw !important;
-                            background-color:white;
-                            vertical-align: middle;
-                            color: #555555;
-                            border-radius: 0;
-                            margin: 2px;
-                            border: none;
-                            font-size: 17px;
-                            border-right: 1px solid;
-                            border-bottom: 1px solid;
-                            border-color: #bfbfbf;
-                            transition: all 150ms linear;
-                      }
-                      .pos .actionpadnew button:hover{
-                          background-color:#eee;
-                      }
-                  </style>-->
               </div>
           </xpath>
      </t>
