@@ -50,8 +50,7 @@ odoo.define('waiter_pos.order', function(require) {
                 this.selectEmployee = selectEmployee;
             },
             set_quantity:async function(quantity, keep_price){
-                console.log(quantity)
-                if(quantity == 'remove' && this.quantity == 0){
+                if(quantity == 'remove' && this.quantity == 0 && this.pos.config.module_pos_hr && this.pos.get_cashier().pin){
                       Gui.showPopup('NumberPopupCustom', {
                             isPassword: true,
                             title: _t('Manager Password ?'),
