@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_country_state_district_location_tree" model="ir.ui.view">
+        <field name="name">res.country.state.district.location.tree</field>
+        <field name="model">res.country.state.district.location</field>
+        <field name="arch" type="xml">
+            <tree string="State" editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="district_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_country_state_district_panchayat_form" model="ir.ui.view">
+        <field name="name">res.country.state.district.location.form</field>
+        <field name="model">res.country.state.district.location</field>
+        <field name="arch" type="xml">
+            <form string="Location">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="district_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_profession_category_tree" model="ir.ui.view">
+        <field name="name">profession.category.tree</field>
+        <field name="model">profession.category</field>
+        <field name="arch" type="xml">
+            <tree string="Profession Category">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_profession_category_form" model="ir.ui.view">
+        <field name="name">profession.category.form</field>
+        <field name="model">profession.category</field>
+        <field name="arch" type="xml">
+            <form string="Profession Category">
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name" required="True"/>
+                        </group>
+                        <group>
+                            <field name="image" class="oe_avatar" widget="image"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Work Professions">
+                            <field name="worker_profession_ids" widget="one2many"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <record id="action_profession_category" model="ir.actions.act_window">
+        <field name="name">Profession Categories</field>
+        <field name="res_model">profession.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a category
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_profession_category" name="Profession Category"
+              action="action_profession_category"
+              parent="contacts.res_partner_menu_config"
+              sequence="2"/>
+</odoo>

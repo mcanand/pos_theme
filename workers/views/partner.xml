@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_new_form" model="ir.ui.view">
+        <field name="name">view.res.partner.new.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+               <field name="worker_profession_id" required="True"/>
+               <field name="is_user"/>
+               <field name="sub_user_type" required="True"/>
+               <field name="avg_rating" attrs="{'invisible':[('sub_user_type','=','user')]}"/>
+            </field>
+            <field name="email" position="attributes">
+                <attribute name="required">True</attribute>
+            </field>
+            <field name="phone" position="attributes">
+                <attribute name="required">True</attribute>
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page string="Rating" attrs="{'invisible':[('sub_user_type','=','user')]}">
+                    <field name="partner_rating_ids">
+                        <tree editable="bottom">
+                            <field name="comment"/>
+                            <field name="star_count"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
