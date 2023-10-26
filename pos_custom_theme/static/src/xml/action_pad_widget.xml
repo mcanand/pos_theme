@@ -31,7 +31,11 @@
         <div class="actionpadnew">
             <button class="button order-number" width="50">
                 Order No<br/>
-                <t t-esc="env.pos.get_order().name"/>
+                <t t-esc="env.pos.get_order().sequence_number"/>
+            </button>
+            <button class="button order-date" width="50">
+                 Invoice No<br/>
+<!--                <t t-esc="env.pos.get_order().creation_date.toLocaleDateString()"/>-->
             </button>
              <button class="button order-date" width="50">
                  Invoice Date<br/>
@@ -41,6 +45,8 @@
                  User<br/>
                 <t t-esc="env.pos.get_order().employee.name"/>
             </button>
+        </div>
+            <div class="actionpadnew">
             <button class="button set-customer" t-att-class="{'decentered': isLongName}"
                         t-on-click="trigger('click-customer')">
                     <t t-if="!env.isMobile">

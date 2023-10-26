@@ -13,7 +13,7 @@ class PosOrder(models.Model):
 
     def _export_for_ui(self, order):
         res = super(PosOrder, self)._export_for_ui(order)
-        res['freight_charge'] = order.waiter_id.id if order.waiter_id else ''
+        res['freight_charge'] = order.freight_charge
         return res
 
     @api.model
