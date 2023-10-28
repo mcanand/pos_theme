@@ -15,19 +15,20 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
           }
           async ClickAddLineDescription(){
                 const selectedOrderline = this.env.pos.get_order().get_selected_orderline();
+                console.log(this.env.pos.get_order())
                 if (!selectedOrderline) return;
-
-                const { confirmed, payload: inputNote } = await this.showPopup('TextAreaPopup', {
-                    startingValue: selectedOrderline.get_customer_note(),
-                    title: this.env._t('Add Customer Note'),
-                });
-
-                if (confirmed) {
-                    selectedOrderline.set_customer_note(inputNote);
-                }
+//                const { confirmed, payload: inputNote } = await this.showPopup('ProductInfoEditPopup', {
+//                    startingValue: selectedOrderline.get_customer_note(),
+//                    title: this.env._t('Add Customer Note'),
+//                });
+//
+//
+//                if (confirmed) {
+//                    selectedOrderline.set_customer_note(inputNote);
+//                }
           }
           async ClickShowProductInfo(){
-                console.log(this.env.pos.get_order())
+                console.log(this.env.pos.get_order().get_selected_orderline())
                 const orderline = this.env.pos.get_order().get_selected_orderline();
                 if (orderline) {
                     const product = orderline.get_product();
