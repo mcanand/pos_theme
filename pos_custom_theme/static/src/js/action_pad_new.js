@@ -212,7 +212,7 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 }
           }
           async AddOrderLineWithQtyButton(){
-               if( $('#InputProductUpdateQty').val()>0){
+               if( $('#InputProductUpdateQty').val()>0 && this.selected_product){
                     var options = {'quantity': $('#InputProductUpdateQty').val()}
                     var order = this.env.pos.get_order()
                      if (!order) {

@@ -3,15 +3,18 @@
     <t t-name="ProductInfoEditPopup" owl="1">
        <div role="dialog" class="modal-dialog">
             <Draggable>
-                <div class="popup popup-selection">
+                <div class="popup popup-selection ">
                     <header class="title drag-handle">
                         <t t-esc="props.title"/>
                     </header>
-                    <div class="selection scrollable-y ProductInfoEditPopup">
+                    <div class="selection scrollable-y ProductInfoEditPopup" style="padding:15px;">
                         <t t-if="props.line">
-                            <input type="text" autofocus="True" name="name" t-att-value="props.line.product.display_name" t-on-keyup="onKeyUpDiscountAmt"/>
-                            <input type="text" name="barcode" t-att-value="props.line.product.barcode" t-on-keyup="onKeyUpDiscountAmt"/>
-                            <table class="">
+                            <input type="text" autofocus="True" style="width:100%;"
+                                   name="name" t-att-value="props.line.product.display_name"
+                                   t-on-keyup="onKeyUpDiscountAmt"/>
+                            <input type="text" name="barcode" style="width:100%;" placeholder="Barcode"
+                                   t-att-value="props.line.product.barcode || ''" t-on-keyup="onKeyUpDiscountAmt"/>
+                            <table class="" style="width:103%;">
                                 <tr>
                                     <td>Rate:</td>
                                     <td><input type="text" name="rate" t-att-value="props.line.price" t-on-keyup="onKeyUpDiscountAmt"/></td>
