@@ -139,7 +139,7 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                    if (a.backendId !== b.backendId) {
                      return a.id - b.backendId;
                    }
-                   return b.validation_date.localeCompare(a.validation_date);
+                   return b.validation_date.toString().localeCompare(a.validation_date);
                 });
           }
           getCustomer(order) {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+     <t t-inherit="pos_hr.LoginScreen" t-inherit-mode="extension">
+         <xpath expr="//div" position="replace">
+             <div class="login-overlay" t-if="env.pos.config.themes=='default'">
+                <div class="screen-login">
+                    <div class="login-title"><small>Log in to </small>
+                        <t t-esc="shopName" />
+                    </div>
+                    <div class="login-body">
+                        <span class="login-element">
+                            <img class="login-barcode-img"
+                                 src="/point_of_sale/static/img/barcode.png" />
+                            <div class="login-barcode-text">Scan your badge</div>
+                        </span>
+                        <span class="login-or">or</span>
+                        <span class="login-element">
+                            <button class="login-button select-employee"
+                                    t-on-click="selectCashier">Select Cashier</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+             <div class="login-overlay" t-if="env.pos.config.themes=='theme_new'">
+                <div class="screen-login">
+                    <img class="pos-logo" style="margin-top:10px;height:60px;" t-att-src="env.pos.company_logo_base64" alt="Logo"/>
+                    <div class="login-title"><small>Log in to </small>
+                        <t t-esc="shopName" />
+                    </div>
+                    <div class="login-body">
+                        <span class="login-element">
+                            <img class="login-barcode-img"
+                                 src="/point_of_sale/static/img/barcode.png" />
+                            <div class="login-barcode-text">Scan your badge</div>
+                        </span>
+                        <span class="login-or">or</span>
+                        <span class="login-element">
+                            <button class="login-button select-employee"
+                                    t-on-click="selectCashier">Select Cashier</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+         </xpath>
+     </t>
+</templates>

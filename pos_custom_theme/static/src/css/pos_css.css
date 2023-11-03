@@ -340,3 +340,6 @@
     color: white;
     border-radius: 10px;
 }
+.pos .loader{
+    background:linear-gradient(to right bottom, rgb(119, 113, 126), rgb(79, 98, 153)) !important;
+}

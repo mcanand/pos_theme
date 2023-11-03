@@ -53,6 +53,9 @@
 
                 <div t-if="['LOADING', 'CLOSING'].includes(state.uiState)" class="loader" t-transition="swing">
                     <div class="loader-feedback">
+                        <img class="pos-logo" style="height:150px;"
+                             t-att-class="{ oe_hidden: state.theme == 'default' }"
+                                       src="/pos_custom_theme/static/src/image/LogoDigi.png" alt="Logo"/>
                         <h1 class="message">
                             <t t-esc="loading.message" />
                         </h1>
