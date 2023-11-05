@@ -14,6 +14,21 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
      var core = require('web.core');
     var _t = core._t;
 
+    models.load_models([{
+         model:  'res.partner',
+         fields: ['name', 'id'],
+         domain: [],
+         loaded: function(self, partners) {
+             self.agents = []
+             partners.forEach(function(agent){
+                 _.each(self.config.agent_ids, function(result){
+                        if(agent.id == result){
+                            self.agents.push(agent)
+                        }
+                 });
+             });
+         }
+     }]);
 
     class ActionPadNew extends PosComponent{
           constructor() {
@@ -23,6 +38,35 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 this.invoice_number = this.env.pos.get_order().invoice_number
                 this.products = []
                 this.selected_product = false
+          }
+          get_agent(){
+                 var agents = this.env.pos.agents
+                 var order = this.env.pos.get_order()
+                 var names = []
+                if(agents && order.agent_id){
+                    _.each(agents, function(agent){
+                        if(order.agent_id == agent.id){
+                            names.push(agent.name)
+                        }
+                    });
+                }
+                return names[0]
+          }
+          async AddAgent(){
+                var agents = this.env.pos.agents
+                if(agents.length > 0){
+                    await Gui.showPopup('SelectionPopupAgent', {
+                        title: _t('Add Agent'),
+                        list: agents,
+                    });
+                    this.render();
+                }
+                else{
+                    Gui.showPopup('ErrorPopup', {
+                         title: _t('No Agents Found'),
+                        body: _t('No agents found Please add agents in configuration'),
+                    });
+                }
           }
           async ClickAddLineDescription(){
                 const selectedOrderline = this.env.pos.get_order().get_selected_orderline();
@@ -178,18 +222,17 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 var self = this
                 var key = event.target.value
                 $('.product_custom_popup_new').show(400)
-                const search_products = await this.rpc({
-                        model: 'product.product',
-                        method: 'search_custom_product',
-                        args: [[],{'key':key}],
-                        context: this.env.session.user_context,
-                });
                 var products = []
                 var product_by_id = this.env.pos.db.product_by_id
-                for(var i=0;i<search_products.length;i++){
-                    var product = product_by_id[search_products[i]]
-                    products.push(product)
-                }
+                console.log(product_by_id)
+                _.each(product_by_id, function(product){
+                    if(product.display_name && product.display_name.toLowerCase().includes(key.toLowerCase())){
+                        products.push(product)
+                    }
+                    if(product.barcode && product.barcode.includes(key.toLowerCase())){
+                        products.push(product)
+                    }
+                });
                 this.products = products
                 this.render();
           }
@@ -221,10 +264,10 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     const product = this.selected_product;
                     if (!options) return;
                     await order.add_product(product, options);
-                }
+               }
           }
           async PopupClose(){
-            $('.product_custom_popup_new').hide(400)
+                $('.product_custom_popup_new').hide(400)
           }
     }
     ActionPadNew.template = 'ActionPadNew';

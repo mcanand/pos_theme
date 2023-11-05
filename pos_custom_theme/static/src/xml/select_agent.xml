@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="SelectionPopupAgent" owl="1">
+        <div role="dialog" class="modal-dialog SelectionPopupAgent">
+            <Draggable>
+                <div class="popup popup-selection">
+                    <header class="title drag-handle">
+                        <t t-esc="props.title"/>
+                    </header>
+                    <div class="selection scrollable-y">
+                        <input class="search_input"
+                               t-on-input="_onSearchInputAgent"
+                               placeholder="Search..."/>
+                        <div class="agents">
+                           <t t-foreach="props.list" t-as="item" t-key="item.id">
+                                <div class="selection-item"
+                                     t-on-click="selectAgent(item)">
+                                    <t t-esc="item.name"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <footer class="footer">
+                        <div class="button" t-on-click="cancel">
+                            <t t-esc="props.cancelText"/>
+                        </div>
+                        <div class="button remove_agent" t-on-click="RemoveAgent">
+                            Remove Agent
+                        </div>
+                    </footer>
+                </div>
+            </Draggable>
+        </div>
+    </t>
+</templates>

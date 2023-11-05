@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_res_partner_new_form_journal_agent" model="ir.ui.view">
+        <field name="name">view.res.partner.new.journal.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="agent_rank" invisible="1"/>
+                <field name="journal_id" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
+                <field name="product_id" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
+                <field name="agent_comm" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

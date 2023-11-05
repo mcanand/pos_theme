@@ -17,6 +17,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 col-lg-6 o_setting_box" id="agents">
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Agents</span>
+                        <div class="text-muted">
+                            Choose Agents
+                        </div>
+                        <div class="content-group mt16">
+                            <field name="agent_ids" colspan="4" nolabel="1" widget="many2many_tags" options="{'no_create': True}"/>
+                        </div>
+                    </div>
+                </div>
             </xpath>
             <xpath expr="//div[@id='payment_methods_new']" position="after">
                 <div class="col-12 col-lg-6 o_setting_box" id="fast_payment_method">
@@ -50,6 +61,19 @@
                                        class="col-lg-3 o_light_label"/>
                                 <field name="freight_charge"/>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='iface_invoicing']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="auto_invoice_printing">
+                    <div class="o_setting_left_pane">
+                        <field name="auto_invoice"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="auto_invoice"/>
+                        <div class="text-muted">
+                            Create Invoice Automatically while Validate or on fast payment
                         </div>
                     </div>
                 </div>

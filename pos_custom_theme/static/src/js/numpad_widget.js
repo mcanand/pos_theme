@@ -17,7 +17,19 @@ odoo.define('pos_custom_theme.numpad_widget', function (require) {
             this.askPin = askPin;
         }
         async ClickFastPayment(){
-            var currentOrder = this.env.pos.get_order()
+            var currentOrder = this.env.pos.get_order();
+            if(this.env.pos.config.auto_invoice){
+                if(!this.env.pos.get_client()){
+                    await this.showPopup('ErrorPopup', {
+                        title: this.env._t('customer not found'),
+                        body: this.env._t('Add customer to continue..')
+                    });
+                    return;
+                }
+                else{
+                    currentOrder.set_to_invoice(!currentOrder.is_to_invoice());
+                }
+            }
             var paymentMethod = false
             var payment_methods_by_id = this.env.pos.payment_methods_by_id
             var payment_id = this.env.pos.config.fast_payment_method_id[0]

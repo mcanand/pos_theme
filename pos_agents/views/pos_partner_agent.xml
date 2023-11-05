@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_partner_view_search_agent" model="ir.ui.view">
+        <field name="name">res.partner.search.agent.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <filter string="Agent Invoices" name="agent" domain="[('agent_rank','>', 0)]"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="res_partner_action_agent" model="ir.actions.act_window">
+        <field name="name">Agents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_agent': 1,'res_partner_search_mode': 'agent','default_is_company': False, 'default_agent_rank': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Agent in your address book
+            </p>
+            <p>
+                helps you easily track all activities related to a agents.
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_point_of_sale_customer"
+              name="Agents"
+              parent="point_of_sale.menu_point_of_sale"
+              action="res_partner_action_agent"
+              sequence="101"/>
+</odoo>

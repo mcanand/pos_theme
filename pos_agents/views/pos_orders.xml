@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_pos_order_agent_form" model="ir.ui.view">
+        <field name="name">view.pos.order.form.agent</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_agent_invoice"
+                        string="Agent Bill"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-pencil-square-o"
+                        attrs="{'invisible':[('state','!=','invoiced')]}">
+                    </button>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="agent_invoice_ids_count" invisible="1"/>
+                <button name="create_agent_bill" type="object" string="Agent Invoice"
+                         attrs="{'invisible': [('agent_invoice_ids_count', '>', 0)]}"/>
+            </xpath>
+            <field name="partner_id" position="after">
+                <field name="agent_id" context="{'res_partner_search_mode': 'agent', 'default_agent_rank': 1}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

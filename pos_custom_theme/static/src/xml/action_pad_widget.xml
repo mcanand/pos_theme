@@ -60,7 +60,12 @@
                     </t>
             </button>
             <button class="button order-user" width="50" t-on-click="AddAgent()">
-                 Agent<br/>
+                <t t-if="get_agent()">
+                     <t t-esc="get_agent()"/>
+                </t>
+                <t t-else="">
+                 Add Agent
+                </t>
             </button>
         </div>
         <div class="actionpadnew">

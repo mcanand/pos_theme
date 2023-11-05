@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="agent_commission" model="product.product">
+            <field name="name">Agent Commission</field>
+            <field name="lst_price">0</field>
+            <field name="standard_price">0</field>
+            <field name="taxes_id" eval="False"/>
+            <field name="supplier_taxes_id" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="detailed_type">service</field>
+        </record>
+    </data>
+</odoo>

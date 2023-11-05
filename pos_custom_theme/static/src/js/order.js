@@ -24,8 +24,10 @@ odoo.define('waiter_pos.order', function(require) {
                 this.freight_charge = json.freight_charge || 0
                 this.total_discount_amt = json.total_discount_amt || 0
                 this.invoice_number = json.invoice_number || this.invoice_number || 0
+                this.agent_id = json.agent_id || false
                 return _order_super.init_from_JSON.apply(this, arguments);
             },
+
             set_freight_charge: function(charge){
                 this.freight_charge = charge
                 this.trigger('change', this)
@@ -80,6 +82,7 @@ odoo.define('waiter_pos.order', function(require) {
                 json.freight_charge = this.get_freight_charge()
                 json.total_discount_amt = this.total_discount_amt
                 json.invoice_number = this.invoice_number
+                json.agent_id = this.agent_id
                 return json
             },
             export_for_printing: function () {

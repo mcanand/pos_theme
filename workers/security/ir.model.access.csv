@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_profession_category,profession.category,model_profession_category,,1,1,1,1
-access_worker_profession,worker.profession,model_worker_profession,,1,1,1,1
-access_res_partner_rating,res.partner.rating,model_res_partner_rating,,1,1,1,1
