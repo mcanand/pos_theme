@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data noupdate="1">
-        <record id="gent_invoice_journal" model="account.journal">
+        <record id="agent_invoice_journal" model="account.journal">
             <field name="name">Agent Invoice</field>
             <field name="code">ABILL</field>
             <field name="type">purchase</field>
             <field name="sequence">99</field>
-            <field name="refund_sequence">True</field>
         </record>
     </data>
 </odoo>
