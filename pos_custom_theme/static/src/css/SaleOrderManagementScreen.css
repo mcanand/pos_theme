@@ -1,14 +1,14 @@
 .order-management-screen .controls button{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 
 }
 .pos .order-management-screen .control-button{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 
 }
 .pos .order-management-screen .orders .order-row{
     margin-top: 2px;
-    border-radius: 10px;
+    border-radius: 0px;
     border: 0px solid;
 }
 .ticket-button.highlight {
@@ -28,11 +28,11 @@
     background: #435c92 !important;
 }
 .order-management-screen .pos-search-bar .search input,.order-management-screen .pos-search-bar .filter{
-    border-radius: 10px;
+    border-radius: 0px;
     color: #435c92 !important;
 }
 .order-management-screen .pos-search-bar .search ul{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .order-management-screen .pos-search-bar .search li.highlight {
     background: #8496bf !important;
@@ -46,9 +46,9 @@
     color: white !important;
 }
 .order-management-screen .pos-search-bar .filter .options{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .order-management-screen .control-panel .button{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
     background:white !important;
 }

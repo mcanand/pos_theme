@@ -8,11 +8,11 @@
     background: linear-gradient(to right bottom, #77717e, #4f6299) !important;
 }
 .pos .screen-login{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .pos .login-button {
     color: #000 !important;
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 
 }
 .pos .pane-border{
@@ -20,40 +20,40 @@
 }
 /*popups*/
 .pos .modal-dialog .popup{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .pos .popup .title{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .pos .popup .button{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
     color: black;
 }
 .pos .popup-numpad .input-button, .pos .popup-numpad .mode-button{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .pos .popup input, .pos .popup-input{
-    border-radius:10px !important;
+    border-radius:0px !important;
 }
 /*products*/
 .pos .product-screen .product .price-tag{
-    border-radius:10px !important;
+    border-radius:0px !important;
     background: #435c92 !important;
 }
 .pos .product-screen .product .product-info-button{
-    border-radius:10px !important;
+    border-radius:0px !important;
     background: #435c92 !important;
 }
 .pos .product-screen .product{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
     margin-top: 4px;
     margin-left: 4px;
 }
 .cash-move .input-amount .input-type{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .pos textarea{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 /*search product*/
 .search-bar-portal .search-box .database-icon{
@@ -97,6 +97,15 @@
 }
 .pos .product-screen .numpad .button-theme{
     background: #aee1ff;
+
+}
+.pos .product-screen .numpad .button-theme .icon-wrap,.pos .product-screen .numpad .button-extra-theme .icon-wrap{
+    display: inline-flex;
+    position: relative;
+    text-align: center;
+}
+.pos .product-screen .numpad .button-theme .icon-wrap span, .pos .product-screen .numpad .button-extra-theme .icon-wrap span{
+    margin-left: 8px;
 }
 .pos .product-screen .numpad .button{
     font-size: 17px;
@@ -114,10 +123,10 @@
     margin-top: -4.7vw;
 }
 .pos .product-screen .rightpane{
-    width:775px !important;
+    width:700px !important;
 }
 .pos .product-screen .leftpane{
-    max-width: 575px !important;
+    max-width: 650px !important;
 }
 .pos .product-screen .control-buttons-main{
     text-align: center;
@@ -127,7 +136,7 @@
     margin-top: -57px;
     margin-left: 0px;
     border: none;
-    border-radius: 10px;
+    border-radius: 0px;
     border-top: 1px solid;
     border-color: #bfbfbf;
     border-top-right-radius: 4px;
@@ -140,7 +149,7 @@
     font-weight: bold;
     vertical-align: middle;
     color: #555555;
-    border-radius: 10px;
+    border-radius: 0px;
     font-size: 17px;
     border: none;
     border-right: 1px solid;
@@ -172,7 +181,7 @@
     /* line-height: 38px; */
     padding: 10px !important;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 0px;
     color: #435c92;
     font-size: 18px;
     margin-left: 6px;
@@ -203,7 +212,7 @@
 
 .pos .product-screen .total_section {
 
-    width: 575px;
+    width: 650px;
     position:fixed;
     bottom:0;
 
@@ -214,7 +223,7 @@
 .pos .product-screen .total_section button{
     float: left;
     height: 80px;
-    width: 115px;
+    width: 130px;
     font-weight: bold;
     font-size: 16px;
     vertical-align: middle;
@@ -272,22 +281,16 @@
 }
 
 .pos .product-screen .category-list.simple {
-    padding: 5px;
-    background: #d3d3d3;
     display: flex;
-    /* flex: 1; */
     width: 613px;
     overflow-x: scroll;
 }
 .pos .product-screen .category-simple-button{
     min-width: 85px;
-    margin-left:5px;
-    border-radius:10px;
-    background:white;
 }
 .search-bar-portal .search-box input{
     width: 150px;
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .search-bar-portal, .search-bar-portal .search-box{
     flex: 0 !important;
@@ -312,11 +315,11 @@
 .product_custom_popup_new{
     position: absolute;
     background: white;
-    width: 555px;
+    width: 634px;
     z-index: 1;
     max-height: 401px;
     margin-top: 44px;
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 5px;
     display:none;
     overflow-y:scroll;
@@ -341,7 +344,7 @@
 .product_custom_popup_new table tr:hover{
     background: #8496bf;
     color: white;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 .pos .loader{
     background:linear-gradient(to right bottom, rgb(119, 113, 126), rgb(79, 98, 153)) !important;

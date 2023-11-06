@@ -1,5 +1,5 @@
 .screen .top-content .button{
-    border-radius: 10px;
+    border-radius: 0px;
     background: white;
 }
 .pos .clientlist-screen .client-list th{
@@ -21,6 +21,6 @@
     color:white !important;
   }
 .pos .clientlist-screen .client-details input, .pos .clientlist-screen .client-details select{
-    border-radius: 10px !important;
+    border-radius: 0px !important;
     padding: 11px !important;
 }

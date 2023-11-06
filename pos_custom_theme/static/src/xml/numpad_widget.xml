@@ -7,7 +7,10 @@
                <button class="input-button number-char" t-on-click="sendInput('2')">2</button>
                <button class="input-button number-char" t-on-click="sendInput('3')">3</button>
                <button class="mode-button" t-att-class="{'selected-mode': props.activeMode === 'quantity'}"
-                       t-on-click="changeMode('quantity')">Qty</button>
+                       t-on-click="changeMode('quantity')">
+
+                   Qty
+               </button>
                <br/>
                <button class="input-button number-char" t-on-click="sendInput('4')">4</button>
                <button class="input-button number-char" t-on-click="sendInput('5')">5</button>
@@ -44,17 +47,26 @@
                <button class="input-button number-char" t-on-click="sendInput('2')">2</button>
                <button class="input-button number-char" t-on-click="sendInput('3')">3</button>
                <button class="mode-button button-theme" t-att-class="{'selected-mode': props.activeMode === 'quantity'}"
-                       t-on-click="changeMode('quantity')">Qty</button>
+                       t-on-click="changeMode('quantity')">
+                   <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/qty.png" style="width:20px;"/>
+                   <span>Qty</span>
+                   </div>
+
+               </button>
 
 
                  <button class="button button-theme" t-on-click="ClickRefund()" t-if="hasPriceControlRights">
-                    <i class="fa fa-undo" role="img" aria-label="Refund" title="Refund" />
-                    Return
+                    <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/return.png" style="width:20px;"/>
+                        <span>Return</span>
+                    </div>
                 </button>
                   <button class="button button-theme" t-on-click="ClickAddFreightCharge()" t-if="hasPriceControlRights">
-                    <i class="fa fa-plus"/>
-                    <span> </span>
-                    <span>Freight</span>
+                    <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/frieght.png" style="width:20px;"/>
+                        <span>Freight</span>
+                    </div>
                  </button>
                 <button class="button button-theme" t-if="hasPriceControlRights">
                     <SetSaleOrderButton/>
@@ -68,12 +80,19 @@
                         'disabled-mode': !hasManualDiscount
                     }"
                        t-att-disabled="!hasManualDiscount"
-                       t-on-click="changeMode('discount')">Disc</button>
+                       t-on-click="changeMode('discount')">
+                    <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/Disc.png" style="width:20px;"/>
+                        <span>Disc</span>
+                    </div>
+
+               </button>
 
                 <button class="button button-theme" t-on-click="ClickBarcodePromo()" t-if="hasPriceControlRights">
-                    <i class="fa fa-barcode"/>
-                    <span> </span>
-                    <span>Enter Code</span>
+                    <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/Promo.png" style="width:30px;height:20px;margin-top:10px;"/>
+                        <span>Enter Code</span>
+                    </div>
                  </button>
                  <button class="button button-theme" t-on-click="ClickResetProgram()" t-if="hasPriceControlRights">
                     <i class="fa fa-star"></i>
@@ -81,8 +100,10 @@
                     <span>Reset Programs</span>
                 </button>
                  <button class="button button-theme" t-on-click="env.pos.add_new_order()" t-if="hasPriceControlRights">
-                    <i class="fa fa-hand-stop-o" role="img" aria-label="hold" title="hold"/>
-                    Hold
+                     <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/hold.png" style="width:20px;"/>
+                        <span>Hold</span>
+                    </div>
                 </button>
                <br/>
                <button class="input-button number-char" t-on-click="sendInput('7')">7</button>
@@ -92,20 +113,31 @@
                     'selected-mode': props.activeMode === 'price',
                     'disabled-mode': !hasPriceControlRights
                 }" t-att-disabled="!hasPriceControlRights"
-                       t-on-click="changeMode('price')">Price</button>
+                       t-on-click="changeMode('price')">
+                    <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/Price.png" style="width:18px;"/>
+                        <span>Price</span>
+                    </div>
+               </button>
 
 
             <button class="button button-theme" t-on-click="ClickOpenDrawer()" t-if="hasPriceControlRights">
-                <i class="fa fa-bars" role="img" aria-label="drawer" title="drawer"/>
-                Drawer
+                 <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/drawer.png" style="width:20px;"/>
+                        <span>Drawer</span>
+                    </div>
               </button>
              <button class="button button-theme" t-on-click="ClickToPrint()" t-if="hasPriceControlRights">
-                <i class="fa fa-print" role="img" aria-label="print" title="print"/>
-                Print
+                 <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/print.png" style="width:20px;"/>
+                        <span>Print</span>
+                    </div>
              </button>
              <button class="button button-theme" t-on-click="showScreen('TicketScreen')" t-if="hasPriceControlRights">
-                 <i class="fa fa-rotate-right" role="img" aria-label="recall" title="recall"/>
-                 Recall
+                  <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/Recall.png" style="width:20px;"/>
+                        <span>Recall</span>
+                    </div>
              </button>
 
                <br/>
@@ -116,20 +148,23 @@
                 <t t-esc="decimalSeparator"/>
             </button>
                <button class="input-button button-theme numpad-backspace" t-on-click="sendInput('Backspace')">
-                <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png"
-                     width="24" height="21" alt="Backspace"/>
+                <img style="pointer-events: none;" src="/pos_custom_theme/static/src/image/backspace.png"
+                     width="30" height="auto" alt="Backspace"/>
             </button>
-            <button class="button" t-on-click="ClickFastPayment()" t-if="hasPriceControlRights" style="width:21.5% !important;background-color: #ffac00 !important;color: #212529;">
-                <i class="fa fa-angle-double-right" role="img" aria-label="FastPay" title="FastPay"/>
-                Fast Payment
+            <button class="button button-extra-theme" t-on-click="ClickFastPayment()" t-if="hasPriceControlRights" style="width:21.5% !important;background-color: #ffac00 !important;color: #212529;">
+<!--                <i class="fa fa-angle-double-right" role="img" aria-label="FastPay" title="FastPay"/>-->
+<!--                <img src="/pos_custom_theme/static/src/image/fast payment.png" style="width:20px;"/>-->
+<!--                Fast Payment-->
+                <div class="icon-wrap" style="margin-top:14px;">
+                       <img src="/pos_custom_theme/static/src/image/fast payment.png" style="width:20px;"/>
+                        <span>Fast Payment</span>
+                    </div>
              </button>
-             <button class="button" t-on-click="trigger(props.actionToTrigger or 'click-pay')" t-if="hasPriceControlRights" style="width:21.5% !important;background-color: #28a745 !important;color: #fff;">
-                <div class="pay-circle" t-att-class="{ 'highlight': props.isActionButtonHighlighted }">
-                    <span>
-                        <i class="fa fa-chevron-right" role="img" aria-label="Pay" title="Pay"/>
-                        Payment
-                    </span>
-                </div>
+             <button class="button button-extra-theme" t-on-click="trigger(props.actionToTrigger or 'click-pay')" t-if="hasPriceControlRights" style="width:21.5% !important;background-color: #28a745 !important;color: #fff;">
+                 <div class="icon-wrap" style="margin-top:14px;">
+                       <img src="/pos_custom_theme/static/src/image/payment.png" style="width:20px;"/>
+                        <span>Payment</span>
+                    </div>
              </button>
         </div>
         </xpath>

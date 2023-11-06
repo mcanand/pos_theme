@@ -15,6 +15,9 @@
                         </h1>
                     </div>
             </xpath>
+            <field name="default_code" position="attributes">
+                <attribute name="string">ref / SL</attribute>
+            </field>
         </field>
     </record>
     <record id="product_template_only_form_view_inherit" model="ir.ui.view">
@@ -32,6 +35,10 @@
                         </h1>
                     </div>
             </xpath>
+            <field name="default_code" position="attributes">
+                <attribute name="string">Ref / SL No</attribute>
+            </field>
+
         </field>
     </record>
 </odoo>

@@ -224,7 +224,6 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 $('.product_custom_popup_new').show(400)
                 var products = []
                 var product_by_id = this.env.pos.db.product_by_id
-                console.log(product_by_id)
                 _.each(product_by_id, function(product){
                     if(product.display_name && product.display_name.toLowerCase().includes(key.toLowerCase())){
                         products.push(product)
@@ -240,10 +239,21 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 this.selected_product = product
                 $('.product_custom_popup_new').hide(400)
                 $('#InputProductUpdateQty').focus()
-                this.render()
+                console.log($('#InputProductUpdateQty').val())
+                this.render();
+                var val = $('#InputProductUpdateQty').val()
+                $('#InputProductUpdateQty').val(' ')
+                $('#InputProductUpdateQty').val(val)
           }
+          isNumeric(n) {
+              return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
+            }
           async AddOrderLineWithQty(){
-                if(event.key=='Enter' && this.selected_product){
+                if(event.target.value && !this.isNumeric(event.target.value)){
+                    this.showPopup('ErrorPopup', { title:'Check Again', body: 'Check Entered quantity again' });
+                    return;
+               }
+                if(event.key=='Enter' && this.selected_product && event.target.value > 0){
                     var options = {'quantity':event.target.value}
                     var order = this.env.pos.get_order()
                      if (!order) {
@@ -253,9 +263,14 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     if (!options) return;
                     await order.add_product(product, options);
                 }
+
           }
           async AddOrderLineWithQtyButton(){
-               if( $('#InputProductUpdateQty').val()>0 && this.selected_product){
+                if($('#InputProductUpdateQty').val() && !this.isNumeric($('#InputProductUpdateQty').val())){
+                    this.showPopup('ErrorPopup', { title:'Check Again', body: 'Check Entered quantity again' });
+                    return;
+               }
+               if( $('#InputProductUpdateQty').val()>0 && this.selected_product ){
                     var options = {'quantity': $('#InputProductUpdateQty').val()}
                     var order = this.env.pos.get_order()
                      if (!order) {
@@ -265,6 +280,7 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     if (!options) return;
                     await order.add_product(product, options);
                }
+
           }
           async PopupClose(){
                 $('.product_custom_popup_new').hide(400)

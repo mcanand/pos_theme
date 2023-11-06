@@ -1,6 +1,6 @@
 .screen .top-content .button{
     background-color: white !important;
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 .screen .top-content .button.highlight, .pos .control-button.highlight, .pos .button.highlight{
     background-color: #435c92 !important;
@@ -9,21 +9,21 @@
     background: white !important;
     color: black !important;
     margin-top: 5px;
-     border-radius: 10px !important;
+     border-radius: 0px !important;
 
 }
 .pos .paymentline{
     background: #8496bf !important;
     color: white !important;
-     border-radius: 10px !important;
+     border-radius: 0px !important;
      margin-top: 5px;
 }
 .paymentline.selected {
     background: #435c92 !important;
     color: white;
      margin-top: 5px;
-     border-radius: 10px !important;
+     border-radius: 0px !important;
 }
 .payment-screen .payment-buttons .button{
-     border-radius: 10px !important;
+     border-radius: 0px !important;
 }
