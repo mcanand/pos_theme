@@ -12,8 +12,8 @@
                             <input type="text" autofocus="True" style="width:100%;"
                                    name="name" t-att-value="props.line.product.display_name"
                                    t-on-keyup="onKeyUpDiscountAmt"/>
-                            <input type="text" name="barcode" style="width:100%;" placeholder="Barcode"
-                                   t-att-value="props.line.product.barcode || ''" t-on-keyup="onKeyUpDiscountAmt"/>
+<!--                            <input type="text" name="barcode" style="width:100%;" placeholder="Barcode"-->
+<!--                                   t-att-value="props.line.product.barcode || ''" t-on-keyup="onKeyUpDiscountAmt"/>-->
                             <table class="" style="width:103%;">
                                 <tr>
                                     <td>Rate:</td>
