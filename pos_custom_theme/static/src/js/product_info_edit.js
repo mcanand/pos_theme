@@ -18,7 +18,7 @@ odoo.define('pos_custom_theme.ProductInfoEditPopup', function (require) {
                     input = 0
                 }
                 if(event.target.name=='discount_amt'){
-                    var discount_perc = (input / 100) * this.props.line.price
+                    var discount_perc = (input / this.props.line.price) * 100
                     this.props.line.set_discount(discount_perc)
                 }
                 else if(event.target.name=='discount_perc'){
