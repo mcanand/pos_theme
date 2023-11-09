@@ -13,6 +13,7 @@ odoo.define('waiter_pos.order', function(require) {
 
      models.load_fields('product.product', ['local_name','qty_available']);
      models.load_fields('product.template', ['local_name','qty_available']);
+     models.load_fields('hr.employee', ['show_info']);
 
      var _order_super = models.Order.prototype;
      models.Order = models.Order.extend({

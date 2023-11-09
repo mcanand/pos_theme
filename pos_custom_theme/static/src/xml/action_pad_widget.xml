@@ -31,19 +31,19 @@
         <div class="actionpadnew">
             <button class="button order-number" width="50">
                 Order No<br/>
-                <t t-esc="env.pos.get_order().sequence_number"/>
+                <span t-esc="env.pos.get_order().sequence_number" style="font-size:13px;color:grey;"/>
             </button>
             <button class="button order-date invoice_number" width="50" t-on-click="render()">
                  Invoice No<br/>
-                <t t-esc="invoice"/>
+                <span t-esc="invoice" style="font-size:13px;color:grey;"/>
             </button>
              <button class="button order-date" width="50">
                  Invoice Date<br/>
-                <t t-esc="env.pos.get_order().creation_date.toLocaleDateString()"/>
+                <span t-esc="env.pos.get_order().creation_date.toLocaleDateString()" style="font-size:13px;color:grey;"/>
             </button>
             <button class="button order-user" width="50">
                  User<br/>
-                <t t-esc="env.pos.get_order().employee.name"/>
+                <span t-esc="env.pos.get_order().employee.name" style="font-size:13px;color:grey;"/>
             </button>
         </div>
             <div class="actionpadnew">
@@ -72,7 +72,10 @@
             <button class="button add-description" t-on-click="ClickAddLineDescription()">
                 <i class="fa fa-file-text-o"/>
             </button>
-            <button class="button product-info" t-if="env.pos.get('cashier').role == 'manager'" t-on-click="ClickShowProductInfo()">
+            <button class="button js_discount" t-on-click="ClickAddGlobalDiscount()">
+                <i class="fa fa-tag"></i>
+            </button>
+            <button class="button product-info" t-if="show_info" t-on-click="ClickShowProductInfo()">
                 <i class="fa fa-info-circle"/>
             </button>
             <button class="button orders-qty-minus" t-on-click="ClickQtyUpdateMinus()">
@@ -96,7 +99,7 @@
         </div>
         <div class="actionpadnew">
             <button class="button button-input" style="width: 54%;margin-left: 3px;">
-                <input type="text" t-att-value="selected_product.display_name" placeholder="search product..." id="SelectProduct" t-on-keyup="onKeySelectProduct"/>
+                <input type="text" t-att-value="product_name" placeholder="search product..." id="SelectProduct" t-on-keyup="onKeySelectProduct"/>
             </button>
             <div class="product_custom_popup_new">
                 <span t-on-click="PopupClose"><i class="fa fa-times" style="float:right;padding:5px;cursor:pointer;color:red;font-size:15px;"/> </span>
@@ -111,7 +114,11 @@
                     </tr>
                     <t t-foreach="products" t-as="product">
                         <t t-if="product">
-                            <tr t-on-click="SelectProduct(product)">
+                            <tr t-on-mousedown.prevent="SelectProduct(product)"
+                                class="product_item"
+                                t-att-id="product.id"
+                                t-att-count="product.count"
+                                t-on-click="SelectThis">
                                 <td>
                                     <t t-if="product.barcode" t-esc="product.barcode"/>
                                 </td>

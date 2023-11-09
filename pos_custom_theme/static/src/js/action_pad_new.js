@@ -38,6 +38,7 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 this.invoice_number = this.env.pos.get_order().invoice_number
                 this.products = []
                 this.selected_product = false
+
           }
           get_agent(){
                  var agents = this.env.pos.agents
@@ -69,6 +70,7 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 }
           }
           async ClickAddLineDescription(){
+                console.log(this.env.pos.get_order().get_selected_orderline())
                 const selectedOrderline = this.env.pos.get_order().get_selected_orderline();
                 if (!selectedOrderline) return;
                 if(!selectedOrderline.is_program_reward){
@@ -218,32 +220,91 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     }
                 }
           }
+
+          async SelectThis(event){
+                _.each($('.product_custom_popup_new .product_item'), function(product){
+                    $(product).removeClass('selected');
+                });
+                $(event.target).addClass('selected')
+                $(event.target).focus()
+                event.target.scrollIntoView()
+          }
           async onKeySelectProduct(event){
                 var self = this
-                var key = event.target.value
-                $('.product_custom_popup_new').show(400)
-                var products = []
                 var product_by_id = this.env.pos.db.product_by_id
-                _.each(product_by_id, function(product){
-                    if(product.display_name && product.display_name.toLowerCase().includes(key.toLowerCase())){
-                        products.push(product)
+                var product_items = $('.product_custom_popup_new .product_item')
+                if(event.key == 'Enter'){
+                    var selected_product_item_new = []
+                    for(var i=0;i<product_items.length;i++){
+                        if($(product_items[i]).hasClass('selected')){
+                            selected_product_item_new.push(product_items[i])
+                        }
                     }
-                    if(product.barcode && product.barcode.includes(key.toLowerCase())){
-                        products.push(product)
+                    var product_id = parseInt($(selected_product_item_new[0]).attr('id'))
+                    this.SelectProduct(product_by_id[product_id])
+                }
+                else if(event.key == 'ArrowDown'){
+                    var selected_product_item = []
+                    for(var i=0;i<product_items.length;i++){
+                        if($(product_items[i]).hasClass('selected')){
+                            selected_product_item.push(product_items[i])
+                        }
                     }
-                });
-                this.products = products
-                this.render();
+                    if(selected_product_item.length > 0){
+                        count = parseInt($(selected_product_item[0]).attr('count'))
+                        console.log()
+                        $(product_items[count + 1]).click()
+                    }
+                    else{
+                        $($('.product_custom_popup_new .product_item')[0]).click()
+                    }
+                }
+                else if(event.key == 'ArrowUp'){
+                    var selected_product_item = []
+                    for(var i=0;i<product_items.length;i++){
+                        if($(product_items[i]).hasClass('selected')){
+                            selected_product_item.push(product_items[i])
+                        }
+                    }
+                    if(selected_product_item.length > 0){
+                        count = parseInt($(selected_product_item[0]).attr('count'))
+                        console.log()
+                        $(product_items[count - 1]).click()
+                    }
+                    else{
+                        $($('.product_custom_popup_new .product_item')[0]).click()
+                    }
+                }
+                else{
+                    var key = event.target.value
+                    $('.product_custom_popup_new').show(400)
+                    var products = []
+                    var count = 0
+                    _.each(product_by_id, function(product){
+                        if(product.display_name && product.display_name.toLowerCase().includes(key.toLowerCase())){
+                            product.count = count
+                            products.push(product)
+                            count = count + 1
+                        }
+                        if(product.barcode && product.barcode.includes(key.toLowerCase())){
+                            product.count = count
+                            products.push(product)
+                            count = count + 1
+                        }
+                    });
+                    this.products = products
+                    this.render();
+                }
           }
           async SelectProduct(product){
                 this.selected_product = product
                 $('.product_custom_popup_new').hide(400)
-                $('#InputProductUpdateQty').focus()
-                console.log($('#InputProductUpdateQty').val())
                 this.render();
+                $('#InputProductUpdateQty').focus()
                 var val = $('#InputProductUpdateQty').val()
                 $('#InputProductUpdateQty').val(' ')
                 $('#InputProductUpdateQty').val(val)
+                $('#InputProductUpdateQty').select()
           }
           isNumeric(n) {
               return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
@@ -262,8 +323,23 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     const product = this.selected_product;
                     if (!options) return;
                     await order.add_product(product, options);
+                    _.each($('.product_custom_popup_new .product_item'), function(product){
+                        $(product).removeClass('selected');
+                    });
+                    $('#SelectProduct').focus()
+                    $('#SelectProduct').val('')
+                    this.selected_product = false
+
                 }
 
+          }
+          get product_name(){
+                if(this.selected_product){
+                    return this.selected_product.display_name
+                }
+                else{
+                    return $('#SelectProduct').val()
+                }
           }
           async AddOrderLineWithQtyButton(){
                 if($('#InputProductUpdateQty').val() && !this.isNumeric($('#InputProductUpdateQty').val())){
@@ -279,11 +355,26 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     const product = this.selected_product;
                     if (!options) return;
                     await order.add_product(product, options);
+                    _.each($('.product_custom_popup_new .product_item'), function(product){
+                        $(product).removeClass('selected');
+                    });
+                    $('#SelectProduct').focus()
+                    $('#SelectProduct').val('')
+                    this.selected_product = false
                }
 
           }
           async PopupClose(){
                 $('.product_custom_popup_new').hide(400)
+          }
+          async ClickAddGlobalDiscount(){
+                if (this.env.pos.config.module_pos_discount && this.env.pos.config.discount_product_id && this.env.pos.get_order().get_orderlines().length > 0){
+                    this.showPopup('GlobalDiscountPopup')
+                }
+          }
+          get show_info(){
+                var employee = this.env.pos.get_order().employee
+                return employee.show_info
           }
     }
     ActionPadNew.template = 'ActionPadNew';

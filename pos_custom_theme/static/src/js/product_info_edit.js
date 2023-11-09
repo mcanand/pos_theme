@@ -12,24 +12,30 @@ odoo.define('pos_custom_theme.ProductInfoEditPopup', function (require) {
             this.props.line = this.env.pos.get_order().get_selected_orderline() || false;
         }
         async onKeyUpDiscountAmt(event){
-            var input = parseFloat(event.target.value)
+            var input = event.target.value
 //            if(event.key == 'Enter'){
+
+                if(event.target.name=='name'){
+                    this.props.line.product.display_name = input
+                    this.props.line.full_product_name = input
+                }
                 if(!input){
                     input = 0
                 }
                 if(event.target.name=='discount_amt'){
-                    var discount_perc = (input / this.props.line.price) * 100
-                    this.props.line.set_discount(discount_perc)
+                    var discount_perc = (parseFloat(input) / this.props.line.price) * 100
+                    var disc = this.env.pos.format_currency_no_symbol(discount_perc)
+                    this.props.line.set_discount(disc)
                 }
                 else if(event.target.name=='discount_perc'){
-                    this.props.line.set_discount(input)
+                    this.props.line.set_discount(parseFloat(input))
                 }
                 else if(event.target.name == 'rate'){
-                      this.props.line.price = input
+                      this.props.line.price = parseFloat(input)
                       this.props.line.trigger('change')
                 }
                 else if(event.target.name == 'qty'){
-                      this.props.line.set_quantity(input)
+                      this.props.line.set_quantity(parseFloat(input))
                       this.props.line.trigger('change')
                 }
 //            }

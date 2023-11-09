@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+     <t t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension">
+        <xpath expr="//article" position="replace">
+            <article class="product" tabindex="0" t-on-keypress="spaceClickProduct" t-if="env.pos.config.themes == 'default'"
+                 t-on-click="trigger('click-product', props.product)"
+                 t-att-data-product-id="props.product.id"
+                 t-attf-aria-labelledby="article_product_{{props.product.id}}">
+            <div class="product-img">
+                <i role="img" aria-label="Info" title="Info" class="product-info-button fa fa-info-circle"
+                    t-on-click.stop="onProductInfoClick()"
+                />
+                <img t-att-src="imageUrl" t-att-alt="props.product.display_name" />
+                <span class="price-tag">
+                    <t t-esc="price" />
+                </span>
+            </div>
+            <div class="product-name" t-attf-id="article_product_{{props.product.id}}">
+                <t t-esc="props.product.display_name" />
+            </div>
+        </article>
+            <article class="product" tabindex="0" t-on-keypress="spaceClickProduct" t-if="env.pos.config.themes == 'theme_new'"
+                 t-on-click="trigger('click-product', props.product)"
+                 t-att-data-product-id="props.product.id"
+                 t-attf-aria-labelledby="article_product_{{props.product.id}}">
+            <div class="product-img">
+                <i role="img" aria-label="Info" title="Info" class="product-info-button fa fa-info-circle"
+                    t-on-click.stop="onProductInfoClick()" t-if="env.pos.get_order().employee.show_info"
+                />
+                <img t-att-src="imageUrl" t-att-alt="props.product.display_name" />
+                <span class="price-tag">
+                    <t t-esc="price" />
+                </span>
+            </div>
+            <div class="product-name" t-attf-id="article_product_{{props.product.id}}">
+                <t t-esc="props.product.display_name" />
+            </div>
+        </article>
+        </xpath>
+     </t>
+</templates>

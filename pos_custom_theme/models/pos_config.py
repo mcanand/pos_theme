@@ -9,3 +9,5 @@ class PosConfig(models.Model):
     freight_charge = fields.Float()
     auto_invoice = fields.Boolean()
     agent_ids = fields.Many2many('res.partner', domain=[('agent_rank', '>', 0)], string='Agents')
+    global_discount = fields.Boolean()
+    disc_product_id = fields.Many2one('product.product', string="Discount Product")

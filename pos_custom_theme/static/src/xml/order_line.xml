@@ -5,7 +5,7 @@
                <td><t t-esc="props.count"/></td>
                <td>
                     <span class="product-name">
-                <t t-esc="props.line.get_full_product_name()"/>
+                <t t-esc="props.line.product.display_name"/>
                 <span> </span>
                 <t t-if="props.line.get_product().tracking!=='none' &amp;&amp; (env.pos.picking_type.use_create_lots || env.pos.picking_type.use_existing_lots)">
                     <t t-if="props.line.has_valid_product_lot()">

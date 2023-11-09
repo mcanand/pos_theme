@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="GlobalDiscountPopup" owl="1">
+       <div role="dialog" class="modal-dialog">
+            <Draggable>
+                <div class="popup popup-selection ">
+                    <header class="title drag-handle">
+                        <t t-esc="props.title"/>
+                    </header>
+                    <div class="selection scrollable-y ProductInfoEditPopup" >
+
+                        <div style="font-size:20px;">Grand Total: <t t-esc="env.pos.format_currency(env.pos.get_order().get_total_with_tax())"/> </div>
+<!--                        <label for="disc_amt">Discount In Amount</label>-->
+                        <input type="text" name="disc_amt" t-on-keyup="CalcDiscPerc()" class="disc_amount"
+                                   placeholder="Discount in Amount"/><br/>
+<!--                        <label for="disc_perc">Discount In Percentage(%)</label>-->
+                            <input type="text" name="disc_perc" t-on-keyup="CalcDiscAmt()" class="disc_percentage"
+                                   placeholder="Discount in Percentage"/>
+                    </div>
+                    <footer class="footer">
+                        <div class="button confirm" t-on-click="confirm">
+                            <t t-esc="props.confirmText"/>
+                        </div>
+                        <div class="button cancel" t-on-click="cancel">
+                            <t t-esc="props.cancelText"/>
+                        </div>
+                    </footer>
+                </div>
+            </Draggable>
+        </div>
+    </t>
+</templates>

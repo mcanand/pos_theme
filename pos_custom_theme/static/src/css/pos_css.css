@@ -337,6 +337,10 @@
     padding-right: 4px;
     cursor: pointer;
 }
+.product_custom_popup_new .product_item.selected{
+    background:#8396bf;
+    color:white;
+}
 .product_custom_popup_new table th{
     background:#435c92;
     color: white;
