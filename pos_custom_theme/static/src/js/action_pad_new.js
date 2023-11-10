@@ -181,12 +181,16 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                      all_orders.push(order)
                 });
                 this._state.syncedOrders.toShow = all_orders
-                this._state.syncedOrders.toShow.sort(function(a, b) {
-                   if (a.backendId !== b.backendId) {
-                     return a.id - b.backendId;
-                   }
-                   return b.validation_date.toString().localeCompare(a.validation_date);
-                });
+                if(this._state.syncedOrders){
+                    this._state.syncedOrders.toShow.sort(function(a, b) {
+                       if (a.backendId !== b.backendId) {
+                         return a.id - b.backendId;
+                       }
+                        if (b.validation_date && a.validation_date) {
+                            return b.validation_date.toString().localeCompare(a.validation_date);
+                       }
+                    });
+                }
           }
           getCustomer(order) {
               return order.get_client_name();

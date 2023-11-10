@@ -16,6 +16,7 @@
 <!--                        <label for="disc_perc">Discount In Percentage(%)</label>-->
                             <input type="text" name="disc_perc" t-on-keyup="CalcDiscAmt()" class="disc_percentage"
                                    placeholder="Discount in Percentage"/>
+                        <div class="error" style="color:red;"/>
                     </div>
                     <footer class="footer">
                         <div class="button confirm" t-on-click="confirm">

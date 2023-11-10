@@ -10,10 +10,12 @@
                 </div>
              </t>
              <t t-if="env.pos.config.themes == 'theme_new'">
-                 <i class="fa fa-link" role="img" aria-label="Set Sale Order"
-                       title="Set Sale Order" />
-                    <span> </span>
-                    <span>Sale Order</span>
+                 <div>
+                     <div class="icon-wrap">
+                       <img src="/pos_custom_theme/static/src/image/sale order.png" style="width:30px;height:30px;margin-top:10px;"/>
+                        <div style="margin-top:6px;margin-left:9px;">Sale Order</div>
+                    </div>
+                 </div>
              </t>
          </xpath>
     </t>
