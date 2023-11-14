@@ -5,8 +5,8 @@
             <field name="name">Agent Commission</field>
             <field name="lst_price">0</field>
             <field name="standard_price">0</field>
-            <field name="taxes_id" eval="True"/>
-            <field name="supplier_taxes_id" eval="True"/>
+            <field name="taxes_id" eval="False"/>
+            <field name="supplier_taxes_id" eval="False"/>
             <field name="purchase_ok" eval="True"/>
             <field name="detailed_type">service</field>
         </record>
