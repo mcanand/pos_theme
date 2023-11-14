@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_office_order_form" model="ir.ui.view">
+            <field name="name">office.order.form</field>
+            <field name="model">office.order</field>
+            <field name="arch" type="xml">
+                <form string="Office Order">
+
+                    <field name="company_id" invisible="1"/>
+                    <field name="invoice_id" invisible="1"/>
+                    <field name="agent_invoice_ids" invisible="1"/>
+                    <field name="invoice_ids" invisible="1"/>
+                    <header>
+                        <button name="action_confirm" id="action_confirm" data-hotkey="v"
+                                string="Confirm" class="btn-primary" type="object"
+                                attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                        <button name="action_create_invoice" id="action_create_invoice" data-hotkey="b"
+                                string="Create Invoice" class="btn-primary" type="object"
+                                attrs="{'invisible': ['|',('state', 'not in', ['confirm']),('invoice_id','!=', False)]}"/>
+                        <button name="action_to_draft" id="action_to_draft" data-hotkey="r"
+                                string="Reset to Draft" class="btn-secondary" type="object"
+                                attrs="{'invisible': [('state', 'not in', ['confirm'])]}"/>
+                        <button name="action_agent_bill" id="action_agent_bill" data-hotkey="k"
+                                string="Create agent bill" class="btn-primary" type="object"
+                                attrs="{'invisible': ['|',('state', 'not in', ['confirm']),('agent_invoice_ids','!=', False)]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_invoices"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+                                    attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                                <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                            </button>
+                            <button name="action_view_agent_bill"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+                                    attrs="{'invisible': [('agent_invoice_count', '=', 0)]}">
+                                <field name="agent_invoice_count" widget="statinfo" string="Agent Bill"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date_order" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            </group>
+                        </group>
+                        <group col="2">
+                            <group name="partner_details" string="Customer Details">
+                                <field name="partner_id" widget="res_partner_many2one"
+                                       attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                       context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}"
+                                       options='{"always_reload": True}'/>
+                                <field name="customer_code"/>
+                                <field name="partner_invoice_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                       options='{"always_reload": True}'/>
+                                <field name="partner_shipping_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                       options='{"always_reload": True}'/>
+                            </group>
+                            <group string="Invoice Details">
+                                <field name="journal_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="invoice_id"/>
+                                <field name="invoice_date"/>
+                                <field name="sales_agent_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="sale_type" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="global_discount" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Order Lines">
+                                <field name="order_line" widget="many2many_list"
+                                       attrs="{'readonly': [('state', 'not in', ['draft'])]}">
+                                    <tree editable="bottom">
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="discount_line" invisible="1"/>
+                                        <field name="product_uom_category_id" invisible="1"/>
+                                        <field name="product_code" string="Code"/>
+                                        <field name="product_id" string="Item"/>
+                                        <field name="product_uom" string="Unit"/>
+                                        <field name="product_uom_qty" string="Qty"/>
+                                        <field name="price_unit" string="Rate"/>
+                                        <field name="price_subtotal" string="Total"/>
+                                        <field name="discount" string="Discount %"/>
+                                        <field name="tax_id" widget="many2many_tags" string="Vat %"/>
+                                        <field name="price_tax" string="Vat Amt"/>
+                                        <field name="price_total" string="Gross Total"/>
+                                    </tree>
+                                </field>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group colspan="4">
+                                        <field name="note" class="oe-bordered-editor" nolabel="1"
+                                               placeholder="Terms and conditions..."/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                        <field name="tax_totals_json" widget="account-tax-totals-field" nolabel="1"
+                                               colspan="2"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                            <page string="Other Info" name="other_information">
+                                <group>
+                                    <group name="sales_person" string="Sales">
+                                        <field name="user_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="company_id" options="{'no_create': True}"
+                                               attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    </group>
+                                    <group name="invoicing" string="invoicing">
+                                        <field name="agent_journal_id"
+                                               attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                        <field name="discount_product_id"
+                                               attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_office_order_tree" model="ir.ui.view">
+            <field name="name">office.order.tree</field>
+            <field name="model">office.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="date_order"/>
+                    <field name="state"/>
+                    <field name="amount_total" sum="Total"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record id="action_office_order_form" model="ir.actions.act_window">
+            <field name="name">Back Order Form</field>
+            <field name="res_model">office.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_office_order" name="Back Office"
+        />
+        <menuitem id="menu_office_order_form" name="Office Orders" parent="menu_office_order"
+                  action="action_office_order_form"/>
+
+
+    </data>
+</odoo>

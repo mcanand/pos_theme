@@ -14,5 +14,8 @@ class ResPartner(models.Model):
 
     agent_rank = fields.Integer(default=0)
     journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'purchase')])
+    sale_agent_journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'purchase')])
     product_id = fields.Many2one('product.product', domain=[('detailed_type', '=', 'service')])
+    sale_agent_product_id = fields.Many2one('product.product', domain=[('detailed_type', '=', 'service')])
     agent_comm = fields.Float(string="Agent Commission (%)")
+    sale_agent_comm = fields.Float(string="Agent Commission (%)")

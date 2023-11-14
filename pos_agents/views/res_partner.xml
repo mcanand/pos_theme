@@ -11,6 +11,12 @@
                 <field name="product_id" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
                 <field name="agent_comm" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
             </field>
+            <field name="team_id" position="before">
+                <field name="agent_rank" invisible="1"/>
+                <field name="sale_agent_journal_id" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
+                <field name="sale_agent_product_id" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
+                <field name="sale_agent_comm" attrs="{'required': [('agent_rank', '>', 0)], 'invisible': [('agent_rank', '=', 0)]}"/>
+            </field>
         </field>
     </record>
 </odoo>
