@@ -16,8 +16,11 @@
                 'account'],
     'data': [
         'security/ir.model.access.csv',
+        'views/sessions.xml',
         'views/partner.xml',
-        'views/office.xml'
+        'views/office.xml',
+        'views/sequence.xml',
+
     ],
     'installable': True,
     'application': True,

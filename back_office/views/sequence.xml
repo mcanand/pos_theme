@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="office_order" model="ir.sequence">
+            <field name="name">Office Order</field>
+            <field name="code">office.order</field>
+            <field name="prefix">PG</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+         <record id="office_session" model="ir.sequence">
+            <field name="name">Office Order</field>
+            <field name="code">office.session</field>
+            <field name="prefix">PGS</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

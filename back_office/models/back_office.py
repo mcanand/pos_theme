@@ -24,16 +24,19 @@ class OfficeOrder(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: _('New'))
 
+    session_id = fields.Many2one('office.session')
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string="Customer",
         required=True, readonly=False, change_default=True, index=True,
         tracking=1,
-        domain="[('type', '!=', 'private'), ('company_id', 'in', (False, company_id))]")
+        domain="[('type', '!=', 'private'), ('company_id', 'in', (False, company_id)),('customer_rank','>', 0)]")
     state = fields.Selection(
         selection=[
             ('draft', "Draft"),
+            ('hold', "Hold"),
             ('confirm', "Confirm"),
+            ('done', "Invoiced"),
         ],
         string="Status",
         readonly=True, copy=False, index=True,
@@ -118,12 +121,12 @@ class OfficeOrder(models.Model):
         ), )
     journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'sale')], required=True,
                                  compute="_compute_journal_id", store=True, readonly=False)
-    agent_journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'purchase')])
+    # agent_journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'purchase')])
 
     tax_totals_json = fields.Char(compute='_compute_tax_totals_json')
     note = fields.Html('Terms and conditions')
     global_discount = fields.Float(string="Order Discount", default=0)
-    discount_product_id = fields.Many2one('product.product')
+    # discount_product_id = fields.Many2one('product.product')
     invoice_count = fields.Integer(compute="_compute_invoice_count")
     agent_invoice_count = fields.Integer(compute="_compute_invoice_count")
 
@@ -148,6 +151,8 @@ class OfficeOrder(models.Model):
             journal = self.env['account.journal'].search(domain, limit=1)
             if journal:
                 order.journal_id = journal.id
+            if self.session_id.sale_id.journal_id:
+                order.journal_id = self.session_id.sale_id.journal_id.id
 
     @api.depends('order_line.tax_id', 'order_line.price_unit', 'amount_total', 'amount_untaxed')
     def _compute_tax_totals_json(self):
@@ -183,14 +188,59 @@ class OfficeOrder(models.Model):
     #             ).get_fiscal_position(order.partner_id, order.partner_shipping_id)
     #         order.fiscal_position_id = cache[key]
 
+    def action_done(self):
+        if not self.invoice_id:
+            raise ValidationError(_("Invoice Not created yet.."))
+        if self.session_id.state == 'closed':
+            raise ValidationError(_("This Session is Closed"))
+        self.state = 'done'
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'office.order',
+            'view_mode': 'form',
+            'target': 'current',
+            'view_id': self.env.ref('back_office.view_office_order_form').id,
+            'views': [(False, 'form')],
+            'context': {'default_session_id': self.session_id.id}
+        }
+
+    def action_hold(self):
+        self.write({'state': 'hold'})
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'office.order',
+            'view_mode': 'form',
+            'target': 'current',
+            'view_id': self.env.ref('back_office.view_office_order_form').id,
+            'views': [(False, 'form')],
+            'context': {'default_session_id': self.session_id.id}
+        }
+
+    def action_view_hold(self):
+        order_ids = [x.id for x in self.session_id.order_ids if x.state in ['hold', 'draft']]
+        if order_ids:
+            return {
+                'name': 'Hold Orders',
+                'type': 'ir.actions.act_window',
+                'res_model': 'office.order',
+                'view_mode': 'tree,form',
+                "context": {"create": False},
+                "domain": [('id', 'in', order_ids)],
+                'views': [[False, "tree"], [False, "form"]],
+            }
+
     def action_confirm(self):
         if not self.partner_id:
             raise ValidationError(_("Add Partner to continue"))
         if not self.order_line:
             raise ValidationError(_("Add a product in order line to continue"))
-        if self.sales_agent_id and not self.agent_journal_id:
+        if self.sales_agent_id and not self.session_id.sale_id.agent_journal_id:
             raise ValidationError(_("Agent Journal not found please add"))
+        if self.name == _('New'):
+            self.name = self.env['ir.sequence'].next_by_code(
+                'office.order') or _('New')
         self.state = 'confirm'
+        self._create_invoice()
 
     def _prepare_invoice(self):
         self.ensure_one()
@@ -223,14 +273,14 @@ class OfficeOrder(models.Model):
             'partner_shipping_id': self.partner_shipping_id.id,
             'partner_bank_id': self.company_id.partner_id.bank_ids.filtered(
                 lambda bank: bank.company_id.id in (self.company_id.id, False))[:1].id,
-            'journal_id': self.agent_journal_id.id,
+            'journal_id': self.session_id.sale_id.agent_journal_id.id,
             'invoice_origin': self.name,
             'invoice_line_ids': [
                 (0, 0, {
-                    'product_id': self.sales_agent_id.sale_agent_product_id.id,
+                    'product_id': self.session_id.sale_id.sale_agent_product_id.id,
                     'price_unit': self.get_agent_commission(),
-                    'tax_ids': [(6, 0, self.sales_agent_id.sale_agent_product_id.supplier_taxes_id.ids)],
-                    'product_uom_id': self.sales_agent_id.sale_agent_product_id.uom_id.id,
+                    'tax_ids': [(6, 0, self.session_id.sale_id.sale_agent_product_id.supplier_taxes_id.ids)],
+                    'product_uom_id': self.session_id.sale_id.sale_agent_product_id.uom_id.id,
                 })],
             'company_id': self.company_id.id,
         }
@@ -243,24 +293,26 @@ class OfficeOrder(models.Model):
         return amount
 
     def _create_invoice(self):
-        invoice_vals = self._prepare_invoice()
-        invoice_line_vals = []
-        for line in self.order_line:
-            invoice_line_vals.append(
-                (0, 0, line._prepare_invoice_line()),
-            )
-        invoice_vals['invoice_line_ids'] += invoice_line_vals
-        move = self.env['account.move'].sudo().create([invoice_vals])
-        return move
+        for rec in self:
+            invoice_vals = rec._prepare_invoice()
+            invoice_line_vals = []
+            for line in rec.order_line:
+                invoice_line_vals.append(
+                    (0, 0, line._prepare_invoice_line()),
+                )
+            invoice_vals['invoice_line_ids'] += invoice_line_vals
+            move = self.env['account.move'].sudo().create([invoice_vals])
+            if rec.sales_agent_id:
+                rec.action_agent_bill()
+            if move:
+                rec.invoice_id = move.id
+                ids = rec.invoice_ids.ids
+                rec.invoice_ids = ids + [move.id]
+                rec.state = 'done'
+            return move
 
     def action_create_invoice(self):
-        move = self._create_invoice()
-        if self.sales_agent_id:
-            self.action_agent_bill()
-        if move:
-            self.invoice_id = move.id
-            ids = self.invoice_ids.ids
-            self.invoice_ids = ids + [move.id]
+        self._create_invoice()
 
     def action_to_draft(self):
         if self.invoice_id:
@@ -303,10 +355,10 @@ class OfficeOrder(models.Model):
             'domain': [('id', 'in', self.agent_invoice_ids.ids)]
         }
 
-    @api.onchange('sales_agent_id')
-    def onchange_sale_agent_id(self):
-        if self.sales_agent_id:
-            self.agent_journal_id = self.sales_agent_id.sale_agent_journal_id.id
+    # @api.onchange('sales_agent_id')
+    # def onchange_sale_agent_id(self):
+    #     if self.sales_agent_id:
+    #         self.agent_journal_id = self.sales_agent_id.sale_agent_journal_id.id
 
     @api.onchange('global_discount')
     def onchange_global_discount(self):
@@ -323,10 +375,10 @@ class OfficeOrder(models.Model):
                     line = [x for x in self.order_line if x.discount_line == True][0]
                     line.price_unit = - self.global_discount
                 else:
-                    if not self.discount_product_id:
-                        raise ValidationError(_("Add Discount Product"))
+                    if not self.session_id.sale_id.discount_product_id:
+                        raise ValidationError(_("Add Discount Product in Settings"))
                     orderline = []
-                    orderline.append([0, 0, {'product_id': self.discount_product_id.id,
+                    orderline.append([0, 0, {'product_id': self.session_id.sale_id.discount_product_id.id,
                                              'price_unit': - self.global_discount,
                                              'discount_line': True}])
                     self.order_line = orderline

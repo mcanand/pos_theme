@@ -6,22 +6,30 @@
             <field name="name">office.order.form</field>
             <field name="model">office.order</field>
             <field name="arch" type="xml">
-                <form string="Office Order">
-
+                <form string="Office Order" create="false">
                     <field name="company_id" invisible="1"/>
                     <field name="invoice_id" invisible="1"/>
                     <field name="agent_invoice_ids" invisible="1"/>
                     <field name="invoice_ids" invisible="1"/>
+                    <field name="invoice_count" invisible="1"/>
                     <header>
                         <button name="action_confirm" id="action_confirm" data-hotkey="v"
                                 string="Confirm" class="btn-primary" type="object"
-                                attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                                attrs="{'invisible': [('state', 'not in', ['draft','hold'])]}"/>
                         <button name="action_create_invoice" id="action_create_invoice" data-hotkey="b"
                                 string="Create Invoice" class="btn-primary" type="object"
                                 attrs="{'invisible': ['|',('state', 'not in', ['confirm']),('invoice_id','!=', False)]}"/>
                         <button name="action_to_draft" id="action_to_draft" data-hotkey="r"
                                 string="Reset to Draft" class="btn-secondary" type="object"
-                                attrs="{'invisible': [('state', 'not in', ['confirm'])]}"/>
+                                attrs="{'invisible': ['|',('state', 'in', ['draft','done']),('invoice_id','!=', False)]}"/>
+                        <button name="action_hold" id="action_to_hold" data-hotkey="v"
+                                string="Hold" class="btn-secondary" type="object"
+                                attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                        <button name="action_view_hold" id="action_view_hold" data-hotkey="v"
+                                string="View Hold Orders" class="btn-secondary" type="object"/>
+                        <button name="action_done" id="action_to_done" data-hotkey="v"
+                                string="Done" class="btn-secondary" type="object"
+                                attrs="{'invisible': [('state', 'not in', ['done'])]}"/>
                         <button name="action_agent_bill" id="action_agent_bill" data-hotkey="k"
                                 string="Create agent bill" class="btn-primary" type="object"
                                 attrs="{'invisible': ['|',('state', 'not in', ['confirm']),('agent_invoice_ids','!=', False)]}"/>
@@ -51,34 +59,39 @@
                         </div>
                         <group>
                             <group>
-                                <field name="date_order" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="date_order" attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"/>
+                                <field name="session_id" readonly="1"/>
                             </group>
                         </group>
                         <group col="2">
                             <group name="partner_details" string="Customer Details">
                                 <field name="partner_id" widget="res_partner_many2one"
-                                       attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                       attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"
                                        context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}"
                                        options='{"always_reload": True}'/>
                                 <field name="customer_code"/>
-                                <field name="partner_invoice_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                <field name="partner_invoice_id"
+                                       attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"
                                        options='{"always_reload": True}'/>
-                                <field name="partner_shipping_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                <field name="partner_shipping_id"
+                                       attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"
                                        options='{"always_reload": True}'/>
                             </group>
                             <group string="Invoice Details">
-                                <field name="journal_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="journal_id" attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"/>
                                 <field name="invoice_id"/>
                                 <field name="invoice_date"/>
-                                <field name="sales_agent_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
-                                <field name="sale_type" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
-                                <field name="global_discount" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="sales_agent_id" options="{'no_create': True}"
+                                       attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"/>
+                                <field name="sale_type" attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"/>
+                                <field name="global_discount"
+                                       attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Order Lines">
                                 <field name="order_line" widget="many2many_list"
-                                       attrs="{'readonly': [('state', 'not in', ['draft'])]}">
+                                       attrs="{'readonly': [('state', 'not in', ['draft','hold'])]}">
                                     <tree editable="bottom">
                                         <field name="company_id" invisible="1"/>
                                         <field name="discount_line" invisible="1"/>
@@ -114,12 +127,12 @@
                                         <field name="company_id" options="{'no_create': True}"
                                                attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
                                     </group>
-                                    <group name="invoicing" string="invoicing">
-                                        <field name="agent_journal_id"
-                                               attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
-                                        <field name="discount_product_id"
-                                               attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
-                                    </group>
+                                    <!--                                    <group name="invoicing" string="invoicing">-->
+                                    <!--                                        <field name="agent_journal_id"-->
+                                    <!--                                               attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>-->
+                                    <!--                                        <field name="discount_product_id"-->
+                                    <!--                                               attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>-->
+                                    <!--                                    </group>-->
                                 </group>
                             </page>
                         </notebook>
@@ -149,19 +162,167 @@
             </field>
         </record>
 
+
+        <record id="view_office_sale_form" model="ir.ui.view">
+            <field name="name">office.sale.form</field>
+            <field name="model">office.sale</field>
+            <field name="arch" type="xml">
+                <form editable="top">
+<!--                    <sheet>-->
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                                  <field name="company_id" readonly="1"/>
+
+                            <group string="Invoicing">
+                                <field name="journal_id" string="Invoice Journal"/>
+                                <field name="discount_product_id" string="Global Discount Product"/>
+                            </group>
+                            <group string="Agent Invoicing">
+                                <field name="agent_journal_id"/>
+                                <field name="sale_agent_product_id"/>
+                            </group>
+                        </group>
+<!--                    </sheet>-->
+                </form>
+            </field>
+        </record>
+        <record id="view_office_sale_tree" model="ir.ui.view">
+            <field name="name">office.sale.tree</field>
+            <field name="model">office.sale</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="company_id" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_office_sale_kanban" model="ir.ui.view">
+            <field name="name">office.sale.kanban</field>
+            <field name="model">office.sale</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" create="false">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="session_responsible_user_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h1>
+                                            <field name="name"/>
+                                        </h1>
+                                        <button type="object" name="action_session" string="session"
+                                                class=" btn mt-2">
+                                            <field name="active_session_id"/>
+                                        </button>
+
+                                        <div class="mt-2">
+                                            <field name="session_responsible_user_id" widget="many2one_avatar_user"/>
+                                            <t t-esc="record.session_responsible_user_id.value"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="object" name="action_open_session_orders" string="open"
+                                                class="btn btn-primary mt-2">Open
+                                        </button>
+                                        <button type="object" name="action_close_session_orders" string="close"
+                                                class="btn btn-secondary mt-2">Close
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="object" name="action_sessions" string="sessions"
+                                                class="btn btn-secondary mt-2">Sessions
+                                        </button>
+                                        <button type="object" name="action_orders" string="orders"
+                                                class="btn btn-secondary mt-2">Orders
+                                        </button>
+                                        <button type="object" name="action_settings" string="settings"
+                                                class="btn btn-secondary mt-2">Settings
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
         <!-- Actions -->
         <record id="action_office_order_form" model="ir.actions.act_window">
             <field name="name">Back Order Form</field>
             <field name="res_model">office.order</field>
             <field name="view_mode">tree,form</field>
         </record>
+        <record id="action_sale_view" model="ir.actions.act_window">
+            <field name="name">Sales</field>
+            <field name="res_model">office.sale</field>
+            <field name="view_mode">tree</field>
+        </record>
+        <record id="action_sale_dashboard" model="ir.actions.act_window">
+            <field name="name">Sales</field>
+            <field name="res_model">office.sale</field>
+            <field name="view_mode">kanban</field>
+        </record>
+
+        <record id="action_office_sessions" model="ir.actions.act_window">
+            <field name="name">Sessions</field>
+            <field name="res_model">office.session</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_customers" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'search_default_customer': 1,'res_partner_search_mode': 'customer','default_is_company':
+                False, 'default_customer_rank': 1}
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Customer in your address book
+                </p>
+                <p>
+                    helps you easily track all activities related to a customer.
+                </p>
+            </field>
+        </record>
+        <record id="action_agents" model="ir.actions.act_window">
+            <field name="name">Agents</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'search_default_agent': 1,'res_partner_search_mode': 'agent','default_is_company':
+                False, 'default_agent_rank': 1}
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Agent in your address book
+                </p>
+                <p>
+                    helps you easily track all activities related to a agents.
+                </p>
+            </field>
+        </record>
 
         <!-- Menu Item -->
         <menuitem id="menu_office_order" name="Back Office"
         />
-        <menuitem id="menu_office_order_form" name="Office Orders" parent="menu_office_order"
-                  action="action_office_order_form"/>
+        <menuitem id="menu_office_order_form" name="Orders" parent="menu_office_order">
+            <menuitem id="menu_orders" name="order" action="action_office_order_form"/>
+            <menuitem id="menu_sessions" name="sessions" action="action_office_sessions"/>
+            <menuitem id="menu_customers" name="Customers" action="action_customers"/>
+            <menuitem id="menu_agents" name="Agents" action="action_agents"/>
+        </menuitem>
 
-
+        <menuitem id="menu_office_dashboard" name="Dashboard" parent="menu_office_order" sequence="0"
+                  action="action_sale_dashboard"/>
+        <menuitem id="menu_office_configurations" name="configurations" parent="menu_office_order">
+            <menuitem id="menu_sales" name="Sale" action="action_sale_view"/>
+        </menuitem>
     </data>
 </odoo>

@@ -1,3 +1,5 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 access_office_order,access_office_order,model_office_order,,1,1,1,1
 access_back_order_line,access_back_order_line,model_back_order_line,,1,1,1,1
+access_office_sale,access_office_sale,model_office_sale,,1,1,1,1
+access_office_session,access_office_session,model_office_session,,1,1,1,1
