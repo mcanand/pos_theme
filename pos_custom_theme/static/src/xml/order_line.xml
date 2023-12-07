@@ -41,11 +41,9 @@
                </td>
               <td>
                   <span class="info" t-if="props.line.get_discount_str() !== '0'">
-                        With a
                         <em>
                             <t t-esc="props.line.get_discount_str()" />%
                         </em>
-                        discount
                     </span>
               </td>
 <!--              <td>-->

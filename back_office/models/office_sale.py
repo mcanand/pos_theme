@@ -10,7 +10,7 @@ class OfficeSale(models.Model):
     session_ids = fields.One2many('office.session', 'sale_id')
     active_session_id = fields.Many2one('office.session', compute="_compute_active_session")
     session_responsible_user_id = fields.Many2one('res.users', compute="_compute_user_id")
-    journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'sale')], required=True,
+    journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'sale')],
                                  compute="_compute_journal_id", store=True, readonly=False)
     agent_journal_id = fields.Many2one('account.journal', domain=[('type', '=', 'purchase')])
     discount_product_id = fields.Many2one('product.product')

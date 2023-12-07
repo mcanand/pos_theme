@@ -10,6 +10,14 @@ odoo.define('pos_custom_theme.ProductInfoEditPopup', function (require) {
         constructor() {
             super(...arguments);
             this.props.line = this.env.pos.get_order().get_selected_orderline() || false;
+            this.ConvertDiscount(this.props.line.discount)
+        }
+        async ConvertDiscount(disc){
+            if(parseFloat(disc)){
+                var amount = ((parseFloat(disc) * this.props.line.price)/ 100 )
+                var amt = this.env.pos.format_currency_no_symbol(amount)
+                this.discount_amount = amt
+            }
         }
         async onKeyUpDiscountAmt(event){
             var input = event.target.value
@@ -73,6 +81,7 @@ odoo.define('pos_custom_theme.ProductInfoEditPopup', function (require) {
             }
             this.env.pos.get_order().set_total_discount_amt()
             this.props.line.trigger('change')
+            this.ConvertDiscount()
         }
         async confirm(){
             super.confirm();

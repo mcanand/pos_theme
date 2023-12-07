@@ -21,7 +21,7 @@
                                     <td>Rate:</td>
                                     <td><input type="text" name="rate" t-att-value="props.line.price" t-on-keyup="onKeyUpDiscountAmt"/></td>
                                     <td>Discount:</td>
-                                    <td><input type="text" name="discount_amt" t-att-value="props.line.discount" t-on-keyup="onKeyUpDiscountAmt"/></td>
+                                    <td><input type="text" name="discount_amt" t-att-value="discount_amount" t-on-keyup="onKeyUpDiscountAmt"/></td>
                                 </tr>
                                 <tr>
                                     <td>Qty:</td>

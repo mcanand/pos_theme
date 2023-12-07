@@ -13,8 +13,10 @@
                 'pos_agents',
                 'l10n_in',
                 'product',
+                'mail',
                 'account'],
     'data': [
+        'views/demo.xml',
         'security/ir.model.access.csv',
         'views/sessions.xml',
         'views/partner.xml',
