@@ -81,5 +81,9 @@
                                 </div>
              </t>
          </xpath>
+         <xpath expr="//div[hasclass('leftpane')]" position="attributes">
+<!--         <attribute name="class">{ oe_hidden: props.active_orders }</attribute> -->
+             <attribute name="t-if">!props.active_orders</attribute>
+         </xpath>
      </t>
 </templates>

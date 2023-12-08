@@ -146,8 +146,8 @@
             <button class="button button-input" style="width:10px;">
                 <input type="text" value="1" id="InputProductUpdateQty" t-on-keyup="AddOrderLineWithQty()"/>
             </button>
-            <button class="button" t-on-click="AddOrderLineWithQtyButton()">
-                <i class="fa fa-plus"/>
+            <button class="button" style="padding:0px;" t-on-click="AddOrderLineWithQtyButton()">
+                <i class="fa fa-level-down" style="transform:rotate(90deg);"/>
             </button>
         </div>
         </span>
