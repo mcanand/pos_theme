@@ -13,6 +13,13 @@ odoo.define('pos_custom_theme.TicketButton', function (require) {
         constructor() {
             super(...arguments);
         }
+        onClick() {
+            if (this.props.isTicketScreenShown) {
+                posbus.trigger('ticket-button-clicked');
+            } else {
+                this.showScreen('TicketScreen',{ active_orders: true });
+            }
+        }
         get count() {
             if (this.env.pos) {
                 var order_list = this.env.pos.get_order_list()

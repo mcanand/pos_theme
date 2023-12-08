@@ -12,6 +12,9 @@ odoo.define('pos_custom_theme.TicketScreen', function (require) {
     const PosThemeTicketScreen = (TicketScreen) => class extends TicketScreen {
         constructor() {
             super(...arguments);
+            if(!this.props.active_orders){
+                this.props.active_orders = false
+            }
         }
     }
     Registries.Component.extend(TicketScreen, PosThemeTicketScreen);
