@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="emp_offer_letter_form_view" model="ir.ui.view">
+        <field name="name">emp.offer_letter.form</field>
+        <field name="model">emp.offer_letter</field>
+        <field name="arch" type="xml">
+            <form string="offer Letter">
+                <header>
+                    <button name="offer_accepted" string="Accepted" class="oe_highlight" type="object" states="draft"/>
+                    <button name="offer_not_accepted" string="Not Accepted" class="oe_highlight" type="object" states="draft"/>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" required="1" domain="[('state', '=', 'joined')]" options="{'no_open':True}"
+                                   attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            <field name="department_id"/>
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            <field name="job_id" required="1" options="{'no_open':True}"  attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            <field name="company_id" options="{'no_open':True}"  attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="offer_letter_remuneration" string="Remuneration">
+                            <field name="remuneration_line_ids" attrs="{'readonly':[('state','!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="offer_letter_id" invisible="1"/>
+                                    <field name="salary_type_id" options="{'no_open':True}"/>
+                                    <field name="currency_id" options="{'no_open':True}"/>
+                                    <field name="salary_break_up"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="offer_letter_details" string="Offer Letter Details">
+                            <field name="offer_letter_details" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="emp_offer_letter_tree_view" model="ir.ui.view">
+        <field name="name">emp.offer_letter.tree</field>
+        <field name="model">emp.offer_letter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="create_uid"/>
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="emp_offer_letter_action" model="ir.actions.act_window">
+        <field name="name">Offer Letter</field>
+        <field name="res_model">emp.offer_letter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

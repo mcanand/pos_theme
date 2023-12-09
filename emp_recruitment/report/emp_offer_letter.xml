@@ -1,0 +1,151 @@
+<odoo>
+    <data>
+        <template id="report_emp_offer_letter">
+            <t t-call="web.html_container">
+                <t t-as="o" t-foreach="docs">
+                    <div t-attf-class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                        <!--                    <t t-call="web.external_layout">-->
+                        <t t-if="company_id">
+                            <t t-set="company" t-value="company_id"/>
+                        </t>
+                        <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                            <t t-set="company" t-value="o.company_id.sudo()"/>
+                        </t>
+                        <t t-else="else">
+                            <t t-set="company" t-value="res_company"/>
+                        </t>
+
+                        <div class="header">
+                            <t t-if="company.logo">
+                                <img style="z-index:800;height:100px;width:300px;" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"/>
+                            </t>
+                        </div>
+                        <br/>
+
+                        <div class="page">
+                            <link href="https://fonts.googleapis.com/css?family=Tinos" rel="stylesheet"/>
+                            <style type="text/css">
+                                p, span {
+                                font-family:'Tinos', sans-serif;
+                                font-size:18px;
+                                }
+                                h3, h4, h6{
+                                font-family:'Tinos', sans-serif;
+                                }
+                                table, tr, td {
+                                border: 1px solid black;
+                                border-collapse: collapse;
+                                border-color:#f2f2f2;
+                                padding:5px;
+                                }
+                                .table2, .tr2, .td2 {
+                                border : none;
+                                }
+                                table .tr1:nth-child(even) {
+                                background-color: #cccccc ;
+                                }
+                                table .tr1:nth-child(odd) {
+                                background-color: #e6e6e6 ;
+                                }
+                            </style>
+
+                            <!--                    <t t-as="doc" t-foreach="docs">-->
+                            <h3 style="text-align:center;font-weight:900;"><u>STRICTLY PRIVATE &amp; CONFIDENTIAL</u></h3>
+                            <div style="margin-top:30px;">Date: <span t-esc="o.date.strftime('%d/%m/%Y')"/></div>
+                            <div style="margin-top:20px;">
+                                <p> Dear, <t t-esc="o.employee_id.name"/></p>
+                                <p>Further to our recent discussion, we are pleased to offer you an employment in <b><t t-esc="o.company_id.name"/></b> as <b>"<t t-esc="o.job_id.name"/>"</b>.
+                                    The Terms and Conditions of the offer are mentioned below.</p>
+                                <h4 style="text-align:left;font-weight:bolder;">1. Remuneration</h4>
+                                <p>Monthly gross remuneration will be as follows.</p>
+                                <table style="width:100%;">
+                                    <tr style="background-color:#b3b3b3;">
+                                        <td>
+                                            <span><b>Salary Details</b></span>
+                                        </td>
+                                        <td>
+                                            <span><b>Currency</b></span>
+                                        </td>
+                                        <td>
+                                            <span><b>Salary Break - up</b></span>
+                                        </td>
+                                        <td>
+                                            <span><b>P.M</b></span>
+                                        </td>
+                                    </tr>
+                                    <tr t-foreach="o.remuneration_line_ids" t-as="line" class="tr1">
+                                        <td style="background-color:#b3b3b3;">
+                                            <span><b><t t-esc="line.salary_type_id.salary_type"/></b></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="line.currency_id.name"/></span>
+                                        </td>
+                                        <td>
+                                            <span><t t-esc="line.salary_break_up"/></span>
+                                        </td>
+                                        <td>
+                                            <span>P.M.</span>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                                <p>Salary will be paid to you as a percentage of target achieved, not exceeding the total value of gross working day salary.</p>
+                                <p>
+                                    <t t-esc="o.offer_letter_details"/>
+                                </p>
+                                <div>
+                                    <p>Yours Sincerely</p><br/>
+                                    <b>I fully understand and accept to abide by the rules of this organization which may change   from time to time. I accept employment under the terms mentioned above.</b>
+                                    <br/>
+                                    <div style="margin-top:100px;"/>
+                                    <table class="table2" style="width:100%;">
+                                        <tr class="tr2">
+                                            <td class="td2" style="width:50%;">
+                                                <div style="border-bottom: 1px solid #3576A1 ;"/>
+                                                <span><b>Sales Manager</b></span>
+                                            </td>
+                                            <td class="td2"/>
+                                            <td class="td2"/>
+                                            <td class="td2" style="width:50%;">
+                                                <div style="border-bottom: 1px solid #3576A1 ;"/>
+                                                <span><b>Date: <t t-esc="o.date.strftime('%d/%m/%Y')"/></b></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="table2" style="width:100%;margin-top:63px;">
+                                        <tr class="tr2">
+                                            <td class="td2" style="width:50%;">
+                                                <div style="border-bottom: 1px solid #3576A1 ;"/>
+                                                <span><b>Name: <t t-esc="o.employee_id.name"/></b></span>
+                                            </td>
+                                            <td class="td2"/>
+                                            <td class="td2"/>
+                                            <td class="td2" style="width:50%;">
+                                                <div style="border-bottom: 1px solid #3576A1 ;"/>
+                                                <span><b>Date: <t t-esc="o.date.strftime('%d/%m/%Y')"/></b></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!--                    </t>-->
+                        </div>
+                    </div>
+
+                </t>
+                <!--                </t>-->
+            </t>
+        </template>
+        <record id="report_offer_letter_document" model="ir.actions.report">
+            <field name="name">Offer Letter</field>
+            <field name="model">emp.offer_letter</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">emp_recruitment.report_emp_offer_letter</field>
+            <field name="report_file">emp_recruitment.report_emp_offer_letter</field>
+            <field name="print_report_name">'Offer Letter - %s' % ((object.employee_id.name))</field>
+            <field name="binding_model_id" ref="model_emp_offer_letter"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

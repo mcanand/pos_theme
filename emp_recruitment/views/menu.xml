@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="employee_recruitment_root"
+                  name="Recruitment"
+                  sequence="20"
+                  web_icon="emp_recruitment,static/description/icon.png"/>
+
+        <menuitem id="emp_offer_letter_root"
+                  name="Offer Letter"
+                  sequence="1"
+                  parent="employee_recruitment_root"/>
+
+        <menuitem id="emp_offer_letter_menu"
+                  name="Offer Letter"
+                  sequence="1"
+                  parent="emp_offer_letter_root"
+                  action="emp_offer_letter_action"/>
+
+        <!--        Configuration-->
+
+        <menuitem id="emp_offer_letter_config"
+                  name="Configuration"
+                  sequence="2"
+                  parent="employee_recruitment_root"
+        />
+
+        <menuitem id="emp_offer_letter_details"
+                  name="Offer Letter Details"
+                  sequence="1"
+                  parent="emp_offer_letter_config"
+                  action="offer_letter_config_action"/>
+
+        <menuitem id="emp_salary_type_details"
+                  name="Salary Type"
+                  sequence="2"
+                  parent="emp_offer_letter_config"
+                  action="salary_type_config_action"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="offer_letter_config_form_view" model="ir.ui.view">
+        <field name="name">offer_letter.config.form</field>
+        <field name="model">offer_letter.config</field>
+        <field name="arch" type="xml">
+            <form string="Offer Letter Settings" delete="0" duplicate="0">
+                <sheet>
+                    <field name="name" invisible="1"/>
+                    <field name="offer_letter_details"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="offer_letter_config_tree_view" model="ir.ui.view">
+        <field name="name">offer_letter.config.tree</field>
+        <field name="model">offer_letter.config</field>
+        <field name="arch" type="xml">
+            <tree string="Offer Letter Settings">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="offer_letter_config_action" model="ir.actions.act_window">
+        <field name="name">Offer Letter Settings</field>
+        <field name="res_model">offer_letter.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="salary_type_form_view" model="ir.ui.view">
+        <field name="name">salary.type.form</field>
+        <field name="model">salary.type</field>
+        <field name="arch" type="xml">
+            <form string="Salary Type">
+                <sheet>
+                    <group>
+                        <field name="salary_type"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="salary_type_tree_view" model="ir.ui.view">
+       <field name="name">salary.type.form</field>
+        <field name="model">salary.type</field>
+        <field name="arch" type="xml">
+            <tree string="Salary Type">
+                <field name="salary_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="salary_type_config_action" model="ir.actions.act_window">
+        <field name="name">Salary Type</field>
+        <field name="res_model">salary.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_emp_offer_letter,name_access_emp_offer_letter,model_emp_offer_letter,,1,1,1,1
+access_offer_letter_config,name_access_offer_letter_config,model_offer_letter_config,,1,1,1,1
+access_salary_type,name_access_salary_type,model_salary_type,,1,1,1,1
+access_emp_remuneration_line,name_access_emp_remuneration_line,model_emp_remuneration_line,,1,1,1,1
+access_emp_stage_msg_wiz,name_access_emp_stage_msg_wiz,model_emp_stage_msg_wiz,,1,1,1,1
