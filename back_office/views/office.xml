@@ -310,12 +310,7 @@
         </record>
 
         <!-- Menu Item -->
-        <menuitem
-        id="point_of_sale.menu_point_root"
-        name="Point of Sale Touch"
-        groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
-        web_icon="back_office,static/description/pos-2.png"
-        sequence="50"/>
+
 
         <menuitem id="menu_office_order" name="Point of Sale Grid" web_icon="back_office,static/description/pos-1.png"
         />
@@ -331,12 +326,6 @@
         <menuitem id="menu_office_configurations" name="configurations" parent="menu_office_order">
             <menuitem id="menu_sales" name="Sale" action="action_sale_view"/>
         </menuitem>
-        <menuitem name="Messenger"
-            id="mail.menu_root_discuss"
-            action="mail.action_discuss"
-            web_icon="mail,static/description/icon.png"
-            groups="base.group_user"
-            sequence="5"
-        />
+
     </data>
 </odoo>
