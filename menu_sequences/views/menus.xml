@@ -79,12 +79,12 @@
 
     <menuitem
             id="point_of_sale.menu_point_root"
-            name="Point of Sale Touch"
+            name="POS (Touch)"
             groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"
             web_icon="back_office,static/description/pos-2.png"
             sequence="14"/>
 
-    <menuitem id="back_office.menu_office_order" name="Point of Sale Grid"
+    <menuitem id="back_office.menu_office_order" name="POS (Grid)"
               web_icon="back_office,static/description/pos-1.png" sequence="15"/>
 
 

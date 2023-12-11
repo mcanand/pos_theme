@@ -134,7 +134,7 @@
                         <div style="margin-top:6px;margin-left:9px;">Print</div>
                     </div>
              </button>
-             <button class="button button-theme" t-on-click="showScreen('TicketScreen')" t-if="hasPriceControlRights">
+             <button class="button button-theme" t-on-click="showScreen('TicketScreen',{ active_orders: true })" t-if="hasPriceControlRights">
                   <div class="icon-wrap">
                        <img src="/pos_custom_theme/static/src/image/Recall.png" style="width:30px;"/>
                         <div style="margin-top:6px;margin-left:9px;">Recall</div>
