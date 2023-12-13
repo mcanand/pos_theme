@@ -70,7 +70,6 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                 }
           }
           async ClickAddLineDescription(){
-                console.log(this.env.pos.get_order().get_selected_orderline())
                 const selectedOrderline = this.env.pos.get_order().get_selected_orderline();
                 if (!selectedOrderline) return;
                 if(!selectedOrderline.is_program_reward){
@@ -121,12 +120,12 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
           async ClickClearAllLines(){
             var order = this.env.pos.get_order()
             var order_lines = order.get_orderlines()
-            if(order && order_lines.length >= 1 && this.env.pos.config.module_pos_hr && this.env.pos.get_cashier().pin){
+            if(order && order_lines.length >= 1 && this.env.pos.config.module_pos_hr && this.env.pos.get_manager().pin){
                 this.showPopup('NumberPopupCustom', {
                     isPassword: true,
                     title: this.env._t('Manager Password ?'),
                     startingValue: false,
-                    cachier: this.env.pos.get_cashier(),
+                    cachier: this.env.pos.get_manager(),
                     order_remove: true,
                     error: false,
                 });
@@ -256,7 +255,6 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     }
                     if(selected_product_item.length > 0){
                         count = parseInt($(selected_product_item[0]).attr('count'))
-                        console.log()
                         $(product_items[count + 1]).click()
                     }
                     else{
@@ -272,7 +270,6 @@ odoo.define('pos_custom_theme.ActionPadNew', function(require) {
                     }
                     if(selected_product_item.length > 0){
                         count = parseInt($(selected_product_item[0]).attr('count'))
-                        console.log()
                         $(product_items[count - 1]).click()
                     }
                     else{

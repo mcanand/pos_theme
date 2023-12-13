@@ -99,13 +99,13 @@ odoo.define('waiter_pos.order', function(require) {
                 this.selectEmployee = selectEmployee;
             },
             set_quantity:async function(quantity, keep_price){
-                if(quantity == 'remove' && this.quantity == 0 && this.pos.config.module_pos_hr && this.pos.get_cashier().pin){
+                if(quantity == 'remove' && this.quantity == 0 && this.pos.config.module_pos_hr && this.pos.get_manager().pin){
                       Gui.showPopup('NumberPopupCustom', {
                             isPassword: true,
                             title: _t('Manager Password ?'),
                             startingValue: false,
                             order_remove: false,
-                            cachier: this.pos.get_cashier(),
+                            cachier: this.pos.get_manager(),
                             error: false,
                       });
                 }
@@ -118,6 +118,16 @@ odoo.define('waiter_pos.order', function(require) {
      models.PosModel = models.PosModel.extend({
             initialize: function(attributes, options){
                 let res = posmodel_super.initialize.apply(this, arguments);
+            },
+            get_manager(){
+                var self = this
+                var emp = []
+                _.each(self.employees, function(employee){
+                    if(employee.name == self.employee.name){
+                        emp.push(employee)
+                    }
+                });
+                return emp[0] || false
             },
             init_from_JSON: function (json) {
                 let res = posmodel_super.init_from_JSON.apply(this, arguments);
