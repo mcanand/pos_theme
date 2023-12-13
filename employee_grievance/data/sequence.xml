@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seq_emp_grievance" model="ir.sequence">
+            <field name="name">Employee Grievance</field>
+            <field name="code">emp.grievance</field>
+            <field name="prefix">Grievance/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>

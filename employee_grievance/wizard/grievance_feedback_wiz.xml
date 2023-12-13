@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="grievance_feedback_form_wiz_form">
+        <field name="name">grievance.feedback.wiz.form</field>
+        <field name="model">grievance.feedback.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Grievance Feedback">
+                <sheet>
+                    <group>
+                        <field name="grievance_id" readonly="1" invisible="1"/>
+                        <field name="manager_feedback" style="white-space: normal; word-break: break-word;"/>
+                    </group>
+                    <footer>
+                        <button string="Save" name="update_manager_feedback" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="grievance_reject_form_wiz_form">
+        <field name="name">grievance.reject.wiz.form</field>
+        <field name="model">grievance.reject.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Grievance Rejection Reason">
+                <sheet>
+                    <group>
+                        <field name="grievance_id" readonly="1" invisible="1"/>
+                        <field name="rejection_reason" style="white-space: normal; word-break: break-word;"/>
+                    </group>
+                    <footer>
+                        <button string="Save" name="update_rejection_reason" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

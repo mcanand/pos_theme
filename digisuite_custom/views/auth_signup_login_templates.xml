@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="auth_signup_login" inherit_id="auth_signup.login" name="Sign up - Reset Password">
+<!--        <xpath expr="//div[hasclass('ticket-button')]" position="replace">-->
+        <xpath expr="//div[hasclass('justify-content-between')]" position="replace">
+            <div class="justify-content-between mt-2 d-flex small" hidden="hidden">
+                <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}" style="display:none;">Don't have an?</a>
+                <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}" style="display:none;">Reset Password</a>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_edu_qualification_form_view" model="ir.ui.view">
+        <field name="name">hr.edu.qualification.tree</field>
+        <field name="model">hr.edu.qualification</field>
+        <field name="arch" type="xml">
+            <form string="Qualification">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_edu_qualification_tree_view" model="ir.ui.view">
+        <field name="name">hr.edu.qualification.tree</field>
+        <field name="model">hr.edu.qualification</field>
+        <field name="arch" type="xml">
+            <tree string="Qualification" delete="0">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_edu_qualification_action" model="ir.actions.act_window">
+        <field name="name">Qualification</field>
+        <field name="res_model">hr.edu.qualification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="employee_type_form_view" model="ir.ui.view">
+        <field name="name">hr.emp.type.tree</field>
+        <field name="model">hr.emp.type</field>
+        <field name="arch" type="xml">
+            <form string="Employee Type">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="employee_type_tree_view" model="ir.ui.view">
+        <field name="name">hr.emp.type.tree</field>
+        <field name="model">hr.emp.type</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Type" delete="0">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="employee_type_action" model="ir.actions.act_window">
+        <field name="name">Employee Type</field>
+        <field name="res_model">hr.emp.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+            id="menu_employee_type_form"
+            name="Employee Type"
+            action="employee_type_action"
+            parent="hr.menu_human_resources_configuration_employee"
+            sequence="3"/>
+
+      <menuitem
+            id="menu_hr_edu_qualification_form"
+            name="Qualification"
+            action="hr_edu_qualification_action"
+            parent="hr.menu_human_resources_configuration_employee"
+            sequence="4"/>
+
+</odoo>

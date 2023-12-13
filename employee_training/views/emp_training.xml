@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employee_training_form_view" model="ir.ui.view">
+        <field name="name">employee.training.form</field>
+        <field name="model">employee.training</field>
+        <field name="arch" type="xml">
+            <form string="Employee training">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="training_pgm"/>
+                            <field name="start_date"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="training_course"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="employee_training_tree_view" model="ir.ui.view">
+        <field name="name">employee.training.tree</field>
+        <field name="model">employee.training</field>
+        <field name="arch" type="xml">
+            <tree string="Employee training">
+                <field name="training_pgm"/>
+                <field name="training_course"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Course-->
+    <record id="training_course_form_view" model="ir.ui.view">
+        <field name="name">training.course.form</field>
+        <field name="model">training.course</field>
+        <field name="arch" type="xml">
+            <form string="training Course">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="training_course_tree_view" model="ir.ui.view">
+        <field name="name">training.course.form</field>
+        <field name="model">training.course</field>
+        <field name="arch" type="xml">
+            <tree string="training Course">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    <record model="ir.ui.view" id="hr_employee_inherit_form_view">-->
+<!--        <field name="name">hr.employee.form.view</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="hr.view_employee_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//page[@name='personal_information']/group" position="after">-->
+<!--                <group name="training_line_ids" colspan="4" string="Training Details">-->
+<!--                    <field name="training_line_ids">-->
+<!--                        <tree editable="bottom">-->
+<!--                            <field name="employee_id" invisible="1"/>-->
+<!--                            <field name="training_pgm" required="1"/>-->
+<!--                            <field name="training_course"/>-->
+<!--                            <field name="start_date"/>-->
+<!--                            <field name="end_date"/>-->
+<!--                            <field name="state"/>-->
+<!--                        </tree>-->
+<!--                    </field>-->
+<!--                </group>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+    <record model="ir.ui.view" id="digi_hr_employees_inherit_form_view">
+        <field name="name">hr.employee.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_employee_custom.hr_employee_inherit_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='emp_education_line_id']" position="after">
+                <group name="training_line_ids" colspan="4" string="Training Details">
+                    <field name="training_line_ids">
+                        <tree editable="bottom">
+                            <field name="employee_id" invisible="1"/>
+                            <field name="training_pgm" required="1"/>
+                            <field name="training_course"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

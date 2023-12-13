@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_promotion_wiz,name_access_employee_promotion_wiz,model_employee_promotion_wiz,,1,1,1,1
+access_emp_promotion_history,name_access_emp_promotion_history,model_emp_promotion_history,,1,1,1,1

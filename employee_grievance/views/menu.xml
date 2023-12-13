@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="employee_grievance_menu"
+                  name="Employee Grievance"
+                  sequence="20"
+                  parent="hr.menu_hr_root"
+                    action="employee_grievance_action"/>
+
+<!--        <menuitem id="employee_grievance_menu_menu"-->
+<!--                  name="Employee Grievance"-->
+<!--                  sequence="1"-->
+<!--                  parent="employee_grievance_menu"-->
+                  action="employee_grievance_action"/>
+    </data>
+</odoo>

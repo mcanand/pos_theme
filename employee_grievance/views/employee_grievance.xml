@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employee_grievance_form_view" model="ir.ui.view">
+        <field name="name">employee.grievance.form</field>
+        <field name="model">employee.grievance</field>
+        <field name="arch" type="xml">
+            <form string="Employee Grievance" delete="0" duplicate="0">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_dm_approval,resolved"/>
+                    <button name="submit_grievance" string="Submit" class="oe_highlight" type="object"
+                            attrs="{'invisible':['|',('state', '!=', 'draft'), ('is_creator', '=', False)]}"/>
+                    <button name="approve_grievance" string="Approve" class="oe_highlight" type="object"
+                            attrs="{'invisible':['|',('is_manager', '!=', True), ('state', '!=', 'waiting_dm_approval')]}"/>
+                    <button name="reject_grievance" string="Rejected" class="oe_highlight" type="object"
+                            attrs="{'invisible':['|',('is_manager', '!=', True), ('state', '!=', 'waiting_dm_approval')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <!--                            <label for="name"/>-->
+                        <h1>
+                            <field name="name" attrs="{'readonly':[('state', '!=', 'draft')]}" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="grievance_subjects" style="white-space: normal; word-break: break-word;"
+                                   attrs="{'readonly':[('state', '!=', 'draft')]}" placeholder="subject of grievance"/>
+                        </group>
+                        <group>
+                            <field name="grievance_desc" style="white-space: normal; word-break: break-word;"
+                                   placeholder="Description of grievance" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="employee_id" options="{'no_open':True, 'no_create_edit':True}" required="1"
+                                   attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="manager_id" options="{'no_open':True, 'no_create_edit':True}" required="1"
+                                   attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="department_id" options="{'no_open':True, 'no_create_edit':True}" required="1"
+                                   attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="manager_feedback" style="white-space: normal; word-break: break-word;" placeholder="Manager's Feedback"
+                                   attrs="{'readonly':['|',('is_manager', '!=', True), ('state', '!=', 'waiting_dm_approval')],
+                                       'invisible':[('state', '=', 'draft')]}"/>
+                            <field name="rejection_reason" style="white-space: normal; word-break: break-word;" placeholder="Rejection Reason"
+                                   attrs="{'readonly':['|',('is_manager', '!=', True), ('state', '!=', 'waiting_dm_approval')],
+                                       'invisible':[('state', '=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="resolved_by" readonly="1" attrs="{'invisible':[('state', '!=', 'resolved')]}"/>
+                            <field name="resolved_on" readonly="1" attrs="{'invisible':[('state', '!=', 'resolved')]}"/>
+                            <field name="rejected_by" readonly="1" attrs="{'invisible':[('state', '!=', 'rejected')]}"/>
+                            <field name="rejected_on" readonly="1" attrs="{'invisible':[('state', '!=', 'rejected')]}"/>
+                            <field name="is_employee" invisible="1"/>
+                            <field name="is_manager" invisible="1"/>
+                            <field name="is_creator" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_uid"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="employee_grievance_tree_view" model="ir.ui.view">
+        <field name="name">employee.grievance.tree</field>
+        <field name="model">employee.grievance</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Grievance" delete="0">
+                <field name="date"/>
+                <field name="create_uid"/>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="manager_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="employee_grievance_view_search" model="ir.ui.view">
+        <field name="name">employee.grievance.search</field>
+        <field name="model">employee.grievance</field>
+        <field name="arch" type="xml">
+            <search string="Search Grievance">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="manager_id"/>
+                <field name="department_id"/>
+                <group expand="0" string="Group By...">
+                    <filter name="group_by_department_id" string="Department" domain="[]" context="{'group_by':'department_id'}"/>
+                    <filter name="group_by_manager_id" string="Manager" domain="[]" context="{'group_by':'manager_id'}"/>
+                    <filter name="group_by_state" string="Manager" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="employee_grievance_action" model="ir.actions.act_window">
+        <field name="name">Grievance</field>
+        <field name="res_model">employee.grievance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="employee_grievance.employee_grievance_view_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>

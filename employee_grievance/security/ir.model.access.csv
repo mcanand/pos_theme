@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_grievance,name_access_employee_grievance,model_employee_grievance,,1,1,1,1
+access_grievance_feedback_wiz,name_grievance_feedback_wiz,model_grievance_feedback_wiz,,1,1,1,1
+access_grievance_reject_wiz,name_grievance_reject_wiz,model_grievance_reject_wiz,,1,1,1,1

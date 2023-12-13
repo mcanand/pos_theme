@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_employee_inherit_form_view">
+        <field name="name">hr.employee.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div/h1" position="before">
+                <h1> <field name="employee_code" placeholder="Employee ID" readonly="1"/></h1>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']" position="replace">
+                <page name="personal_information" string="Employee Information" groups="hr.group_hr_user">
+                    <group>
+                        <group string="Local Address">
+                            <field name="address_home_id" string="Local Address"
+                                   context="{
+                                                'show_address': 1,
+                                                'default_type': 'private',
+                                                'form_view_ref': 'base.res_partner_view_form_private'}"
+                                   options='{"always_reload": True, "highlight_first_line": True}' invisible="1"/>
+                            <field name="private_email" string="Email" invisible="1"/>
+                            <field name="phone" class="o_force_ltr" groups="hr.group_hr_user" string="Local Contact Number" readonly="True" invisible="1"/>
+                            <label for="local_street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="local_street" placeholder="Street..." class="o_address_street"/>
+                                <field name="local_street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="local_city" placeholder="City" class="o_address_city"/>
+                                <field name="local_state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                <field name="local_zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="local_country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                            <field name="local_phone"/>
+                            <field name="local_email"/>
+                            <field name="lang" string="Language"/>
+                            <field name="bank_account_id"/>
+                            <label for="km_home_work"/>
+                            <div class="o_row" name="div_km_home_work">
+                                <field name="km_home_work" groups="hr.group_hr_user"/>
+                                <span>Km</span>
+                            </div>
+
+                        </group>
+                        <!--                        <group string="Local Address">-->
+                        <!--                             <field name="address_home_id" string="Local Address"-->
+                        <!--                                   options='{"always_reload": True, "highlight_first_line": True}' invisible="1"/>-->
+                        <!--                            <label for="local_street" string="Address"/>-->
+                        <!--                                <div class="o_address_format">-->
+                        <!--                                    <field name="local_street" placeholder="Street..." class="o_address_street"/>-->
+                        <!--                                    <field name="local_street2" placeholder="Street 2..." class="o_address_street"/>-->
+                        <!--                                    <field name="local_city" placeholder="City" class="o_address_city"/>-->
+                        <!--                                    <field name="local_state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>-->
+                        <!--                                    <field name="local_zip" placeholder="ZIP" class="o_address_zip"/>-->
+                        <!--                                    <field name="local_country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>-->
+                        <!--                                </div>-->
+                        <!--                            <field name="local_phone"/>-->
+                        <!--                            <field name="local_email"/>-->
+                        <!--                             <field name="lang" string="Language"/>-->
+                        <!--                            <field name="bank_account_id"/>-->
+                        <!--                            <label for="km_home_work"/>-->
+                        <!--                            <div class="o_row" name="div_km_home_work">-->
+                        <!--                                <field name="km_home_work" groups="hr.group_hr_user"/>-->
+                        <!--                                <span>Km</span>-->
+                        <!--                            </div>-->
+                        <!--                        </group>-->
+                        <group string="Home Country Address">
+                            <label for="home_country_street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="home_country_street" placeholder="Street..." class="o_address_street"/>
+                                <field name="home_country_street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="home_country_city" placeholder="City" class="o_address_city"/>
+                                <field name="home_country_state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                <field name="home_country_zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="home_address_country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                            <field name="home_country_phone"/>
+                        </group>
+                        <group string="Citizenship">
+                            <field name="country_id" options='{"no_open": True, "no_create": True}'/>
+                            <field name="identification_id" groups="hr.group_hr_user"/>
+                            <field name="passport_id" groups="hr.group_hr_user"/>
+                            <field name="gender"/>
+                            <field name="birthday"/>
+                            <field name="place_of_birth" groups="hr.group_hr_user"/>
+                            <field name="country_of_birth" groups="hr.group_hr_user"/>
+                        </group>
+                        <group string="Marital Status">
+                            <field name="marital"/>
+                            <field name="spouse_complete_name" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}" groups="hr.group_hr_user"/>
+                            <field name="spouse_birthdate" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}" groups="hr.group_hr_user"/>
+                        </group>
+                        <group string="Dependant">
+                            <field name="children"/>
+                        </group>
+                        <group string="Emergency">
+                            <field name="emergency_contact"/>
+                            <field name="emergency_phone" class="o_force_ltr"/>
+                        </group>
+                        <group string="Work Permit" name="has_work_permit">
+                            <field name="visa_no"/>
+                            <field name="permit_no"/>
+                            <field name="visa_expire"/>
+                            <field name="work_permit_expiration_date"/>
+                            <field name="has_work_permit"/>
+                        </group>
+                        <!--                        <group string="Education">-->
+                        <!--                            <field name="certificate"/>-->
+                        <!--                            <field name="study_field"/>-->
+                        <!--                            <field name="study_school"/>-->
+                        <!--                        </group>-->
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='%(hr.plan_wizard_action)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="is_manager"/>
+                <field name="is_hod"/>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="domain">[('is_manager', '=', True)]</attribute>
+            </xpath>
+            <xpath expr="//field[@name='coach_id']" position="attributes">
+                <attribute name="domain">[('is_hod', '=', True)]</attribute>
+            </xpath>
+            <xpath expr="//field[@name='employee_type']" position="after">
+                <field name="employee_type_id"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_type']" position="replace">
+                <field name="employee_type" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']/group" position="after">
+                <group name="emp_education_line_id" colspan="4" string="Education Details">
+                    <field name="emp_education_line_id">
+                        <tree editable="bottom">
+                            <field name="employee_id" invisible="1"/>
+                            <field name="degree_id"/>
+                            <field name="emp_field_study"/>
+                            <field name="education_school"/>
+                            <field name="education_certificate_id" widget="many2many_binary"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+            <xpath expr="//h2/field[@name='job_title']" position="before">
+                <label for="job_id"/>
+                <br/>
+                <field name="job_id" placeholder="Tags" nolabel="1"/>
+            </xpath>
+            <xpath expr="//h2/field[@name='job_title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='emergency_contact']" position="attributes">
+                <attribute name="string">Emergency Contact1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='emergency_phone']" position="attributes">
+                <attribute name="string">Emergency Contact2</attribute>
+            </xpath>
+              <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="string">Reported user</attribute>
+            </xpath>
+            <!--            <xpath expr="//h1[1]" position="replace">-->
+            <!--                <h3 class="d-flex">-->
+            <!--                    <field name="name" placeholder="Employee's Name" required="True"/>-->
+            <!--                    <a title="Chat" icon="fa-comments" href="#" class="ml8 o_employee_chat_btn" invisible="not context.get('chat_icon')" attrs="{'invisible': [('user_id','=', False)]}" role="button"><i class="fa fa-comments"/></a>-->
+            <!--                </h3>-->
+            <!--            </xpath>-->
+
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="digi_hr_employee_inherits_form_view">
+        <field name="name">hr.employee.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="resume_line_view_form_inherit">
+        <field name="name">hr.resume.line.form.view</field>
+        <field name="model">hr.resume.line</field>
+        <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h1/field[@name='name']" position="replace">
+                <field name="name" required="True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
