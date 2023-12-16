@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_stage_abrus" model="ir.ui.view">
+        <field name="name">crm.inherit</field>
+        <field name="model">crm.stage</field>
+        <field name="inherit_id" ref="crm.crm_stage_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="replace">
+                <form string="Stage">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Negotiation"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="is_prescreening"/>
+                            <field name="is_approved_stage"/>
+                            <field name="is_won"/>
+                            <field name="fold"/>
+                            <field name="team_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'invisible': [('team_count', '&lt;=', 1)]}" kanban_view_ref="381" invisible="1"/>
+                            <field name="abrus_team_ids" widget="many2many_tags"/>
+                            <field name="is_approval_needed"/>
+                            <field name="level_of_approve" attrs="{'invisible':[('is_approval_needed', '=', False)]}" />
+                            <field name="is_converted_stage"/>
+                            <field name="is_declined_stage"/>
+                            <field name="is_oppor_approved_stage"/>
+                        </group>
+                        <field name="team_count" invisible="1"/>
+                    </group>
+                    <notebook attrs="{'invisible':[('is_approval_needed', '=', False)]}" >
+                    <page string="approval Level" >
+                        <field name="level_ids">
+                            <tree editable="bottom">
+
+                                <field name="name"/>
+                                <field name="group_id" />
+                                <field name="users_ids" widget="many2many_tags" readonly="1" force_save="1" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                    <separator string="Requirements"/>
+                    <field name="requirements" nolabel="1" placeholder="Give your team the requirements to move an opportunity to this stage."/>
+                </sheet>
+            </form>
+            </xpath>
+        </field>
+    </record>
+    <record id="crm_stage_tree_inherit" model="ir.ui.view">
+            <field name="name">crm.stage.inherit.view.tree</field>
+            <field name="model">crm.stage</field>
+            <field name="inherit_id" ref="crm.crm_stage_tree"/>
+            <field name="arch" type="xml">
+                <field name="team_id" position="replace">
+                    <field name="abrus_team_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+</odoo>

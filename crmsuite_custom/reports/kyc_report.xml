@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="kyc_dso_report_temp">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table class="table table-condensed" style="border:solid 1px; border-collapse: collapse;">
+                            <p style="text-align:center;border:solid 1px;background-color:#D3D3D3;font-weight:bold;font-size:20px;">Customer Details</p>
+                            <tr>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Company Name</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.kyc_company_name"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;">Company Address:</td>
+                            </tr>
+                            <tr>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Office No.</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.kyc_company_office_no"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Building Name</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.kyc_company_building"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Street</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.kyc_company_street"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Emirates</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.kyc_company_emirates"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;">Residence Address:</td>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Flat/Villa</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_residency_flat"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Building Name</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_residency_building"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Street</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_residency_street"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Emirates</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_residency_emirates"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;">Mob No.</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_company_mobile"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;">Home Country No.</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_home_country_no"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Email ID</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_company_email"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">PO Box</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_company_po_box"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Signatory Mothers Name</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_mother_name"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Source Of Fund</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_source_of_fund"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;">Qualification</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_qualification"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;">Currency Required</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <t t-if="o.kyc_currency_id">
+                                            <span t-field="o.kyc_currency_id.name"></span>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;">Yearly Turn Over</td>
+                                    <td style="border:solid 1px; border-collapse: collapse;">
+                                        <span t-field="o.kyc_yrly_turn_over"/> AED
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;">
+                                        Monthly: &#160;&#160;&#160;Non Cash&#160;&#160;<span t-field="o.kyc_monthly_non_cash_per"/> % &#160;&#160;&#160;Cash &#160;&#160;&#160;<span t-field="o.kyc_monthly_cash_per"/> %
+                                    </td>
+
+                                </tr>
+                            </tr>
+                        </table>
+                        <table class="table table-condensed" style="border:solid 1px; border-collapse: collapse;">
+                            <tr>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;background-color:#D3D3D3;">Customer</td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;background-color:#D3D3D3;">Company</td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;background-color:#D3D3D3;">Country</td>
+                            </tr>
+                            <tr t-foreach="o.kyc_cust_line_id" t-as="cust_line">
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;">
+                                    <span t-field="cust_line.customer_name"/>
+                                </td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;">
+                                    <span t-field="cust_line.company_name"/>
+                                </td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;">
+                                    <t t-if="cust_line.cust_country_id" ><span t-field="cust_line.cust_country_id.name"/></t>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-condensed" style="border:solid 1px; border-collapse: collapse;">
+                            <tr>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;background-color:#D3D3D3;">Suppliers</td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;background-color:#D3D3D3;">Company</td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;font-weight:bold;font-size:20px;background-color:#D3D3D3;">Country</td>
+                            </tr>
+                            <tr t-foreach="o.kyc_suppl_line_id" t-as="supp_line">
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;">
+                                    <span t-field="supp_line.supplier_name"/>
+                                </td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;">
+                                    <span t-field="supp_line.company_name"/>
+                                </td>
+                                <td style="border:solid 1px; border-collapse: collapse;text-align:left;">
+                                    <t t-if="supp_line.suppl_country_id" ><span t-field="supp_line.suppl_country_id.name"/></t>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <div style="width:100%;margin-top:30px;">
+                            <span style="font-weight:bold;font-size:20px;">Business Activity:&#160;&#160;</span><p><t t-esc="o.kyc_business_activity"/></p>
+                        </div>
+                        <div style="width:100%;margin-top:30px;">
+                            <span style="font-weight:bold;font-size:20px;">Personal Experience: Since In UAE - &#160;&#160;</span><p><t t-esc="o.kyc_personal_experience"/></p>
+                        </div>
+                    </div>
+<!--                    <div class="footer">-->
+                    <div style="margin-top:80px;"/>
+                            <table style="width:100%;">
+                                <tr style="width:100%">
+                                    <td style="width:50%; font-weight:bold;font-size:20px;">Date:&#160;&#160;
+                                        <t t-esc="datetime.datetime.strptime(str(o.kyc_date), '%Y-%m-%d').strftime('%d/%m/%Y')"/>
+<!--                                        <t t-esc="o.kyc_date.stftime('%d/%m/%Y')"/>-->
+                                    </td>
+                                    <td style="width:50%;font-weight:bold;font-size:20px;text-align:right;">Name &amp; Signature</td>
+                                </tr>
+                            </table>
+<!--                        </div>-->
+                    <div class="footer"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <report
+            id="report_customer_kyc"
+            model="crm.lead"
+            string="KYC Report"
+            report_type="qweb-pdf"
+            name="crmsuite_custom.kyc_dso_report_temp"
+            file="crmsuite_custom.kyc_dso_report_temp"/>
+</odoo>

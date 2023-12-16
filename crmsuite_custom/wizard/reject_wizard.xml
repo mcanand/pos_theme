@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model ="ir.ui.view" id="abrus_reject_wizard_form">
+          <field name="name">reject.wizard.form</field>
+          <field name="model">abrus.reject.wizard</field>
+
+          <field name="arch" type="xml">
+              <form>
+                  <separator/>
+                  <field name="reject_ribbon_bool" invisible="1"/>
+                  <group>
+<!--                      <field name="staff_id" invisible="1"/>-->
+                      <field name="reason" placeholder="Please write your comment here....." required="1" />
+                  </group>
+                  <footer>
+                    <button string="Reject" name="process_reject_abrus" type="object"
+                              class="oe_highlight"/>
+
+                    <button string="Cancel" class="oe_highlight" special="cancel"/>
+                  </footer>
+              </form>
+          </field>
+        </record>
+        <record model="ir.actions.act_window" id="contract_reject_wizard_action_abrus">
+           <field name="name"> Request Approval</field>
+           <field name="res_model">abrus.reject.wizard</field>
+           <field name="view_mode">form</field>
+           <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="dsa_report_temp">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table class="table table-condensed" style="border:solid 1px; border-collapse: collapse;">
+                            <p style="text-align:center;border:solid 1px;background-color:grey;color:white; "> DEEM – SOFT APPROVAL - CLIENT DETAILS - CREDIT CARD</p>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>01</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">CARD TYPE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.card_type"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>02</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">SALARY</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.salary"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>03</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">CARD VARIANT</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.card_variant"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>04</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">MARTIAL STATUS</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.marital"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>05</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">DATE OF BIRTH</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.dob_abrus"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>06</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">UAE VINTAGE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <p><strong>Year :&amp;ensp;</strong><span t-field="o.years_1" />&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;<strong>Month :&amp;ensp;</strong><span t-field="o.month_1" /></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>07</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">TYPE OF RESIDENCE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.type_of_residence"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>08</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">RESIDENCE - EMIRATE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.residence_emirates"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>09</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">FIXED INCOME</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.fixed_income"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>10</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">EXISTING TOTAL CREDIT CARD LIMIT</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.existing_total_credit"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>11</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">EXISTING TOTAL LOANS EMI</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.existing_total_loans_emi"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>12</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">DBR %</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.dbr_per"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>13</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">OCL in last 3 months ?</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.olc_last_3_months"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>14</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">Cheque bounce in last 6 months ?</td>
+                                <td style="border:solid 1px; border-collapse: collapse;font-size:14px;">
+                                    <span t-field="o.cheque_bounce"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>15</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">Applied PL or CC within last 30 days ?</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.applied_pl"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>16</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">EMAIL ID PERSONAL</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.email_id"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>17</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">MOBILE NUMBER</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.mobile"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>18</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">NATIONALITY</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.nationality"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>19</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">EMIRATES ID NUMBER</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.emirates_id_num"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>20</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">EMIRATES ID EXPIRY DATE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.emirates_id_expiry"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>21</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">PASSPORT NUMBER</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.passport_num"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>22</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">PASSPORT EXPIRY</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.passport_expiry"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>23</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">GENDER</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.gender"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>24</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">OFFICE NO</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.office_num"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>25</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">WORK EMAIL</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.wrk_email"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>26</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">SALARIED/SELF EMPLOYED</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.salaried"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>27</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">COMPANY FULL NAME</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.company_name"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>28</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">COMPANY WEBSITE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.comapny_website"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>29</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">COMPANY ADDRESS</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.street_dsa"></span>,
+                                    <span t-field="o.street2_dsa"></span>,
+                                    <span t-field="o.city_dsa"></span>,
+                                    <span t-field="o.state_dsa_id"></span>
+                                    <span t-field="o.zip_dsa"></span>
+                                    <span t-field="o.country_dsa_id"></span>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>30</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">DESIGNATION</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.designation"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>31</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">LENGTH OF SERVICE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <p><strong>Year :&amp;ensp;</strong><span t-field="o.year_2" />&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;<strong>Month :&amp;ensp;</strong><span t-field="o.month_2" /></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>32</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">DATE OF JOINING</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.Dob"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>33</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">SECURITY CHEQUE AVAILABILITY</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.security_check"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>34</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">COMPANY A/C BANK – IBAN NO</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <p><strong>Bank :&amp;ensp;</strong><span t-field="o.bank" /></p>
+                                        <p><strong>IBAN :&amp;ensp;</strong><span t-field="o.iban" /></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>35</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">HOME COUNTRY ADDRESS</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.street_home_dsa"></span>,
+                                    <span t-field="o.street2_dsa_home"></span>,
+                                    <span t-field="o.city_dsa_home"></span>,
+                                    <span t-field="o.state_dsa_home_id"></span>
+                                    <span t-field="o.zip_dsa_home"></span>
+                                    <span t-field="o.country_dsa_home_id"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>36</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">HOME COUNTRY REFERENCE FRIEND /RELATIVE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <p><strong>Name :&amp;ensp;</strong><span t-field="o.name_home_country_ref" /></p>
+                                        <p><strong>Mob No. :&amp;ensp;</strong><span t-field="o.mob_home_country_ref" /></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>37</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">UAE REFERENCE FRIEND /RELATIVE</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <p><strong>Name :&amp;ensp;</strong><span t-field="o.name_uae_frnd" /></p>
+                                        <p><strong>Mob No. :&amp;ensp;</strong><span t-field="o.mob_uae_frnd" /></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>38</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">UAE HOME ADDRESS</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.street_dsa_uae"></span>,
+                                    <span t-field="o.street2_dsa_uae"></span>,
+                                    <span t-field="o.city_dsa_uae"></span>,
+                                    <span t-field="o.state_dsa_uae_id"></span>
+                                    <span t-field="o.zip_dsa_uae"></span>
+                                    <span t-field="o.country_dsa_uae_id"></span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-condensed" style="border:solid 1px; border-collapse: collapse;">
+                            <p style="text-align:center;border:solid 1px;background-color:grey;color:white; "> SUPPLEMENTARY CARD DETAILS - 1</p>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>01</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">FIRST NAME</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.fst_name"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>02</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">LAST NAME</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.lst_name"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>03</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">RELATIONSHIP</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.relationship"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>04</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">PASSPORT NUMBER</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.pass_num"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>05</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">DATE OF BIRTH</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.date_birth"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>06</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">CREDIT LIMIT</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.credit_limit_1"></span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-condensed" style="border:solid 1px; border-collapse: collapse;">
+                            <p style="text-align:center;border:solid 1px;background-color:grey;color:white; "> SUPPLEMENTARY CARD DETAILS - 2</p>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>01</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">FIRST NAME</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.fst_name_2"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>02</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">LAST NAME</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.last_name_2"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>03</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">RELATIONSHIP</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.relationship_2"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>04</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">PASSPORT NUMBER</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.pass_2"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>05</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">DATE OF BIRTH</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.dob_2"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" style="border:solid 1px; border-collapse: collapse;"><b>06</b>
+                                </td>
+                                <td width ="50%" style="border:solid 1px; border-collapse: collapse;text-align:left;">CREDIT LIMIT</td>
+                                <td style="border:solid 1px; border-collapse: collapse;">
+                                    <span t-field="o.credit_lim"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+
+            </t>
+        </t>
+    </template>
+
+
+    <report
+            id="report_dsa_abrus"
+            model="crm.lead"
+            string="CRM Report"
+            report_type="qweb-pdf"
+            name="crmsuite_custom.dsa_report_temp"
+            file="crmsuite_custom.dsa_report_temp"
+            menu="False"
+             />
+</odoo>

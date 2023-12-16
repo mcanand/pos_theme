@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_card_type_abrus,access_card_type_abrus,model_card_type_abrus,base.group_user,1,1,1,1
+access_card_variant_abrus,access_card_variant_abrus,model_card_variant_abrus,base.group_user,1,1,1,1
+access_residence_abrus,access_residence_abrus,model_residence_abrus,base.group_user,1,1,1,1
+access_approve_level,access_approve_level,model_approve_level,base.group_user,1,1,1,1
+access_abrus_reject_wizard,access_abrus_reject_wizard,model_abrus_reject_wizard,base.group_user,1,1,1,1
+
+access_lead_kyc_cust_details,name_access_lead_kyc_cust_details,model_lead_kyc_cust_details,,1,1,1,1
+access_lead_kyc_suppl_details,name_access_lead_kyc_suppl_details,model_lead_kyc_suppl_details,,1,1,1,1
+access_lead_referred,name_access_lead_referred,model_lead_referred,,1,1,1,1
+access_lead_lead_activity,name_access_lead_lead_activity,model_lead_lead_activity,,1,1,1,1
+
+access_lead_bank_cordinator,name_access_lead_bank_cordinator,model_lead_bank_cordinator,,1,1,1,1
+
+access_lead_comments_details,name_lead_comments_details,model_lead_comments_details,,1,1,1,1
+

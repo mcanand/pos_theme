@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="card_type_tree_view" model="ir.ui.view">
+		<field name="name">card.type.tree.view</field>
+		<field name="model">card.type.abrus</field>
+		<field name="arch" type="xml">
+			<tree >
+				<field name="card_type_name"/>
+			</tree>
+		</field>
+	</record>
+	<record id="card_type_form_view" model="ir.ui.view">
+		<field name="name">card.type.form.view</field>
+		<field name="model">card.type.abrus</field>
+		<field name="arch" type="xml">
+			<form >
+				<sheet>
+					<group>
+						<field name="card_type_name"/>
+						<field name="is_need_amt_details"/>
+					</group>
+
+					<group>
+						<field name="stage_ids" widget="many2many_tags" invisible="0"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_card_type" model="ir.actions.act_window">
+		<field name="name">Card</field>
+		<field name="res_model">card.type.abrus</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="crm_card_abrus"
+			  parent="crm.crm_menu_config"
+			  name="Product"
+			  action="action_card_type"
+			  sequence="1"
+	/>
+	<!--					CARD VARIANT-->
+	<record id="card_variant_tree_view" model="ir.ui.view">
+		<field name="name">card.variant.tree.view</field>
+		<field name="model">card.variant.abrus</field>
+		<field name="arch" type="xml">
+			<tree >
+				<field name="card_variant_name"/>
+			</tree>
+		</field>
+	</record>
+	<record id="card_variant_form_view" model="ir.ui.view">
+		<field name="name">card.variant.form.view</field>
+		<field name="model">card.variant.abrus</field>
+		<field name="arch" type="xml">
+			<form >
+				<sheet>
+					<group>
+						<field name="card_variant_name"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_variant_type" model="ir.actions.act_window">
+		<field name="name">Card</field>
+		<field name="res_model">card.variant.abrus</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="crm_card_variant_abrus"
+			  parent="crm.crm_menu_config"
+			  name="Card Variant"
+			  action="action_variant_type"
+			  sequence="1"
+	/>
+
+	<!--				Residence Type-->
+
+	<record id="residence_tree_view" model="ir.ui.view">
+		<field name="name">residence.tree.view</field>
+		<field name="model">residence.abrus</field>
+		<field name="arch" type="xml">
+			<tree >
+				<field name="residence_ab"/>
+			</tree>
+		</field>
+	</record>
+	<record id="residence_form_view" model="ir.ui.view">
+		<field name="name">residence.form.view</field>
+		<field name="model">residence.abrus</field>
+		<field name="arch" type="xml">
+			<form >
+				<sheet>
+					<group>
+						<field name="residence_ab"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_residence" model="ir.actions.act_window">
+		<field name="name">Card</field>
+		<field name="res_model">residence.abrus</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="crm_residence"
+			  parent="crm.crm_menu_config"
+			  name="Residence Type"
+			  action="action_residence"
+			  sequence="1"
+	/>
+</odoo>
