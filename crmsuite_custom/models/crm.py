@@ -32,6 +32,16 @@ class CRMLead(models.Model):
         display_msg = 'Rejected -->' + 'Reason -->' + self.reject_reason
         self.message_post(body=display_msg)
 
+    @api.onchange('user_id')
+    def onchange_assigned_to(self):
+        if self.user_id:
+            # self.user_id = self.assigned_to
+            if self.team_id:
+                team_members = self.env['crm.team'].sudo().search([('id', '=', self.team_id.id)])
+                self.lead_team_ids = [(4, self.user_id.id)]
+                for member in team_members.member_ids:
+                    self.lead_team_ids = [(4, member.id)]
+
     def approval_abrus(self):
         for move in self:
             move.current_login = self.env.user
@@ -605,7 +615,6 @@ class LeadCommentsData(models.Model):
             else:
                 rec.check_group = False
 
-
     # def write(self, values):
     #     # Check if the user belongs to the specified group
     #     edit_comments_group = self.env.ref('crmsuite_custom.edit_comments_group')
@@ -633,9 +642,6 @@ class LeadCommentsData(models.Model):
     #         result['arch'] = etree.tostring(doc)
     #
     #     return result
-
-
-
 
     # def current_user_datetime(self):
     #     user_tz = tz.gettz(self.env.user.tz)

@@ -8,8 +8,16 @@
             <xpath expr="//div[@class='oe_title']/label[1]" position="before">
                 <h1>
                     <field name="crm_lead_lead_seq" readonly="1"/>
+
                 </h1>
             </xpath>
+            <!--            <xpath expr="//div[@class='oe_chatter']" position="replace">-->
+            <!--                <div class="oe_chatter">-->
+            <!--                    <field name="message_follower_ids"/>-->
+            <!--                    <field name="activity_ids"/>-->
+            <!--                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>-->
+            <!--                </div>-->
+            <!--            </xpath>-->
             <xpath expr="//div[@class='oe_title']/label[1]" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
@@ -41,6 +49,7 @@
             <!--            <xpath expr="//feild[@name='context']" position="replace"/>-->
 
             <xpath expr="//field[@name='team_id']" position="after">
+                <field name="lead_team_ids" invisible="1"/>
                 <field name="is_send_approval_bool" invisible="1"/>
                 <!--                <field name="nxt_user_id" widget="many2many_tags" readonly="1"/>-->
                 <field name="level" invisible="1"/>
@@ -376,7 +385,7 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//field[@name='user_id']" position="replace">
-                <field name="user_id" invisible="1"/>
+                <field name="user_id" string="Assigned to"/>
             </xpath>
             <xpath expr="//field[@name='team_id']" position="replace">
                 <field name="team_id" invisible="1"/>
@@ -393,6 +402,7 @@
                 <field name="rm_name"/>
                 <field name="lead_generator"/>
                 <field name="approved_amt"/>
+<!--                <field name="assigned_to" invisible="0" string="Assigned to"/>-->
             </xpath>
             <xpath expr="//group[1]" position="after">
                 <hr attrs="{'invisible':[('is_need_amt_details', '=', False)]}"/>
